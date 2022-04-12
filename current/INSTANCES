@@ -7,8 +7,8 @@ LOCATION - The location of this IOC.
 
 Template instances:
 
-LAKESHORE:
-    NAME        - The base PV name for this variable leak valve VAT590.
+LEYBOLD:
+    BASE        - The base PV name for this variable leak valve VAT590.
     PORT        - The terminal server:port connected to this variab:le leak valve VAT590.
     ASYNTRACE   - This should be set to turn on asyn tracing for this variable leak valve VAT590.
     DATASCAN    - The rate at which the IOC scans data fields such as temperatures. Default is every 1 second.
