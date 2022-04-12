@@ -1,0 +1,28 @@
+#
+# lakeshore335 substitutions file
+#
+
+# Generate aurchive request 
+file archive_lakeshore335.tpl-arch
+{
+	{
+		TCT = $(TCT)
+	}
+}
+
+file archive_lakeshore335_inputs.tpl-arch
+{
+	pattern
+	{ TCT,		CHAN	}
+	{ $(TCT),	A		}
+	{ $(TCT),	B		}
+}
+
+file archive_lakeshore335_outputs.tpl-arch
+{
+	pattern
+	{ TCT,		OUTPUT	}
+	{ $(TCT),	1		}
+	{ $(TCT),	2		}
+}
+

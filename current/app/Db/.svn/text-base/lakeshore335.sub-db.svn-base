@@ -1,0 +1,57 @@
+#-----------------------------------------------------------------
+# Required substitutions:
+#    TCT   = Prefix for records, e.g. "TCT = X04SA-ES3-LSCI".
+#    PORT  = The stream "bus" to be used, e.g. "BUS = 3".
+#    CSSAN = The rate at which config values are scanned.
+#    DSCAN = The rate at which data values are scanned.
+#-----------------------------------------------------------------
+
+file lakeshore335.tpl-db
+{
+    pattern
+    { TCT,      PORT,       CSCAN    }
+    { $(TCT),   $(PORT),    $(CSCAN) }
+}
+
+file lakeshore335-temps.tpl-db
+{
+    pattern
+    { TCT,      CHAN,   PORT,   SUFFIX, EGU,    DSCAN    }
+    { $(TCT),   A,      $(PORT) K,      K,      $(DSCAN) }
+    { $(TCT),   B,      $(PORT) K,      K,      $(DSCAN) }
+    { $(TCT),   A,      $(PORT) C,      C,      $(DSCAN) }
+    { $(TCT),   B,      $(PORT) C,      C,      $(DSCAN) }
+    { $(TCT),   A,      $(PORT) S,      "",     $(DSCAN) }
+    { $(TCT),   B,      $(PORT) S,      "",     $(DSCAN) }
+}
+
+file lakeshore335-tempsel.tpl-db
+{
+    pattern
+    { TCT,      CHAN,   DSCAN    }
+    { $(TCT),   A,      $(DSCAN) }
+    { $(TCT),   B,      $(DSCAN) }
+}
+
+file lakeshore335-inputs.tpl-db
+{
+    pattern
+    { TCT,      CHAN,   PORT,       CSCAN    }
+    { $(TCT),   A,      $(PORT),    $(CSCAN) }
+    { $(TCT),   B,      $(PORT),    $(CSCAN) }
+}
+
+file lakeshore335-outputs.tpl-db
+{
+    pattern
+    { TCT,      OUTPUT, PORT,       CSCAN    }
+    { $(TCT),   1,      $(PORT),    $(CSCAN) }
+}
+
+file lakeshore335-analogs.tpl-db
+{
+    pattern
+    { TCT,      OUTPUT, PORT,       CSCAN    }
+    { $(TCT),   2,      $(PORT),    $(CSCAN) }
+}
+

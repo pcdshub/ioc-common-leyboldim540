@@ -1,0 +1,4 @@
+# Lakeshore 335 PVs to archive for input $(CHAN)
+$(TCT):GET_TEMP_$(CHAN)     30      monitor
+$(TCT):GET_UNITS_$(CHAN)    30      monitor
+

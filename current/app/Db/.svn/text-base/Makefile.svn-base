@@ -1,0 +1,36 @@
+TOP=../..
+include $(TOP)/configure/CONFIG
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+
+#----------------------------------------------------
+#  Optimization of db files using dbst (DEFAULT: NO)
+#DB_OPT = YES
+
+#----------------------------------------------------
+# Create and install (or just install)
+# databases, templates, substitutions like this
+DB_INSTALLS += $(IOCADMIN)/db/iocSoft.db
+DB += lakeshore335.db
+
+#----------------------------------------------------
+# Create and install (or just install)
+# Archive files, templates, substitutions like this
+#
+ARCHIVE += archive_lakeshore335_ioc.archive
+ARCHIVE += archive_lakeshore335.archive
+
+#----------------------------------------------------
+# Create and install (or just install)
+# Autosave request files, templates, substitutions like this
+#
+REQ += autosave_lakeshore335_ioc.req
+REQ += autosave_lakeshore335.req
+
+# Nothing to build for autosave, just install from $AUTOSAVE/db
+DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
+
+include $(TOP)/configure/RULES
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE
+

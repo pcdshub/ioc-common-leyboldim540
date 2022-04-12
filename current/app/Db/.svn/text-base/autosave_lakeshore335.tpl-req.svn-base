@@ -1,0 +1,5 @@
+# General autosave PVs
+$(TCT):PUT_MODE
+$(TCT):SEND
+$(TCT):RCVE
+

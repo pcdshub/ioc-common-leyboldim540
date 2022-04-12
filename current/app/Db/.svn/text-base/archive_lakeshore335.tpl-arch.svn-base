@@ -1,0 +1,3 @@
+# General Lakeshore 335 PVs to archive
+$(TCT):GET_MODE             30      monitor
+

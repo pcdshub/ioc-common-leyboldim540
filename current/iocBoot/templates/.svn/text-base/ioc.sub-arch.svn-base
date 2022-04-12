@@ -1,0 +1,15 @@
+# IOC archive file
+## iocAdmin PV's on this IOC
+
+# Generate IOC archive request
+file archive_lakeshore335_ioc.archive
+{
+	{ IOC="$$IOC_PV" }
+}
+
+$$LOOP(LAKESHORE)
+file archive_lakeshore335.archive
+{
+	{ TCT="$$NAME" }
+}
+$$ENDLOOP(LAKESHORE)

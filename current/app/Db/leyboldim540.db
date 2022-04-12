@@ -1,0 +1,861 @@
+#
+# VAT590 Database
+#
+#  BASE
+#  	EPICS prefix
+#  PORT
+#  	ASYN PORT_NAME
+#
+#
+record(stringout, "$(BASE):SEND") {
+    field(DESC, "VAT590, send string")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SEND($(BASE),RCVE) $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(stringin, "$(BASE):RCVE") {
+    field(DESC, "VAT590, send/receive")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(stringin, "$(BASE):GET_IDN") {
+    field(DESC, "VAT590, identification")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_IDN $(PORT)")
+    field(PINI, "YES")
+}
+
+record(stringin, "$(BASE):GET_FW_CFG") {
+    field(DESC, "VAT590, FW configuration")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_FW_CFG $(PORT)")
+    field(PINI, "YES")
+}
+
+record(stringin, "$(BASE):GET_FW") {
+    field(DESC, "VAT590, FW number")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_FW $(PORT)")
+    field(PINI, "YES")
+}
+
+record(stringin, "$(BASE):GET_HW_CFG") {
+    field(DESC, "VAT590, HW configuration")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_HW_CFG($(BASE),PFO,SNSR_PS,CNTL_INTF,SNSR_NUM) $(PORT)")
+    field(PINI, "YES")
+}
+
+record(bi, "$(BASE):PFO") {
+    field(DESC, "VAT590, Power failure option")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "PFO not equipped")
+    field(ONAM, "PFO equipped")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "NO_ALARM")
+}
+
+record(bi, "$(BASE):SNSR_PS") {
+    field(DESC, "VAT590, Sensor power supply")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "SPS not equipped")
+    field(ONAM, "SPS equipped")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "NO_ALARM")
+}
+
+record(bi, "$(BASE):CNTL_INTF") {
+    field(DESC, "VAT590, Control Interface")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "RS485 Interface without analog outputs")
+    field(ONAM, "RS485 Interface with analog outputs")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "NO_ALARM")
+}
+
+record(mbbi, "$(BASE):SNSR_NUM") {
+    field(DESC, "VAT590, Number of sensor inputs")
+    field(DTYP, "Raw Soft Channel")
+    field(ZRVL, "1")
+    field(ONVL, "2")
+    field(ZRST, "1 Sensor version")
+    field(ONST, "2 Sensor version")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+}
+
+record(stringin, "$(BASE):GET_VALVE_STATUS") {
+    field(DESC, "VAT590, Valve current status")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_STATUS($(BASE),ACS_MODE,CNTL_MODE,PWR_FAIL_OPTN,WARN_STATUS,SIM_STATUS) $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(mbbi, "$(BASE):ACS_MODE") {
+    field(DESC, "VAT590, Access mode")
+    field(DTYP, "Raw Soft Channel")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "Local")
+    field(ONST, "Remote")
+    field(TWST, "Locked Remote")
+    field(ZRSV, "MINOR")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_ACS_MODE") {
+    field(DESC, "VAT590, Set access mode")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_ACS_MODE $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "Local")
+    field(ONST, "Remote")
+    field(TWST, "Locked Remote")
+    field(ZRSV, "MINOR")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbi, "$(BASE):CNTL_MODE") {
+    field(DESC, "VAT590, Control mode")
+    field(DTYP, "Raw Soft Channel")
+    field(ZRVL, "1")
+    field(ONVL, "2")
+    field(TWVL, "3")
+    field(THVL, "4")
+    field(FRVL, "5")
+    field(FVVL, "6")
+    field(SXVL, "7")
+    field(SVVL, "8")
+    field(EIVL, "9")
+    field(NIVL, "12")
+    field(TEVL, "13")
+    field(ELVL, "14")
+    field(ZRST, "SYNCHRONIZATION")
+    field(ONST, "POSITION CONTROL")
+    field(TWST, "CLOSED")
+    field(THST, "OPEN")
+    field(FRST, "PRESSURE CONTROL")
+    field(FVST, "HOLD")
+    field(SXST, "LEARN")
+    field(SVST, "INTERLOCK OPEN")
+    field(EIST, "INTERLOCK CLOSED")
+    field(NIST, "POWER FAILURE")
+    field(TEST, "SAFETY MODE")
+    field(ELST, "FATAL ERROR")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "MINOR")
+    field(SXSV, "MINOR")
+    field(SVSV, "MINOR")
+    field(EISV, "MINOR")
+    field(NISV, "MAJOR")
+    field(TESV, "MINOR")
+    field(ELSV, "MAJOR")
+}
+
+record(bi, "$(BASE):PWR_FAIL_OPTN") {
+    field(DESC, "VAT590, Power failure option")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "Disabled")
+    field(ONAM, "Enabled")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "NO_ALARM")
+}
+
+record(bi, "$(BASE):WARN_STATUS") {
+    field(DESC, "VAT590, Warning status")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "NO WARNINGS")
+    field(ONAM, "WARNINGS")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "MAJOR")
+}
+
+record(bi, "$(BASE):SIM_STATUS") {
+    field(DESC, "VAT590, Simulation status")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "NORMAL OPERATION")
+    field(ONAM, "SIMULATON RUNNING")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "MINOR")
+}
+
+record(ai, "$(BASE):GET_PWRUP_CNT") {
+    field(DESC, "VAT590, Power up counter")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_PWRUP_CNT $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+}
+
+record(ai, "$(BASE):GET_ISLN_CNT") {
+    field(DESC, "VAT590, Isolation cycle counter")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_ISLN_CNT $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+}
+
+record(ai, "$(BASE):GET_THROT_CNT") {
+    field(DESC, "VAT590, Throtle cycle counter")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_THROT_CNT $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+}
+
+record(stringin, "$(BASE):GET_WARNINGS") {
+    field(DESC, "VAT590, Warnings information")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_WARNINGS($(BASE),SERVICE,LEARN_SET,PWR_FAIL_BATT,AIR_STATUS) $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(bi, "$(BASE):SERVICE") {
+    field(DESC, "VAT590, Service request")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "NO SERVICE REQ.")
+    field(ONAM, "SERVICE REQ.")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "MAJOR")
+}
+
+record(bi, "$(BASE):LEARN_SET") {
+    field(DESC, "VAT590, Learn set data")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "PRESENT")
+    field(ONAM, "NOT PRESENT")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "MAJOR")
+}
+
+record(bi, "$(BASE):PWR_FAIL_BATT") {
+    field(DESC, "VAT590, Power failure battery")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "READY")
+    field(ONAM, "NOT READY")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "NO_ALARM")
+}
+
+record(bi, "$(BASE):AIR_STATUS") {
+    field(DESC, "VAT590, Compressed air supply")
+    field(DTYP, "Raw Soft Channel")
+    field(ZNAM, "OK")
+    field(ONAM, "NOT OK")
+    field(ZSV, "NO_ALARM")
+    field(OSV, "MINOR")
+}
+
+record(stringin, "$(BASE):GET_ERRORS") {
+    field(DESC, "VAT590, Fatal error status")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_ERRORS $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+}
+
+record(ai, "$(BASE):GET_PSENS_VAL") {
+    field(DESC, "VAT590, Direct pressure reading from sensor 1")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_PSENS_VAL $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+    field(EGU,  "")
+}
+
+record(ai, "$(BASE):GET_PSENS_OFF") {
+    field(DESC, "VAT590, Get sensor 1 offset")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_PSENS_OFF $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(EGU,  "V")
+}
+
+record(ai, "$(BASE):GET_PRESSURE") {
+    field(DESC, "VAT590, Actual pressure")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_PRESSURE $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+    field(EGU,  "")
+}
+
+record(ai, "$(BASE):GET_POSITION") {
+    field(DESC, "VAT590, Current valve position")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_POSITION $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+    field(EGU,  "")
+}
+
+record(stringin, "$(BASE):GET_SETPOINT") {
+    field(DESC, "VAT590, Setpoint value")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_SETPOINT $(PORT)")
+    field(SCAN, "$(DSCAN,recursive) second")
+}
+
+record(ao, "$(BASE):SET_POSITION") {
+    field(DESC, "VAT590, Set position setpoint")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_POSITION $(PORT)")
+    field(DRVH, "100000")
+    field(DRVL, "0")
+    field(EGU,  "")
+}
+
+record(ao, "$(BASE):SET_PRESSURE") {
+    field(DESC, "VAT590, Set pressure setpoint")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_PRESSURE $(PORT)")
+    field(DRVH, "")
+    field(DRVL, "")
+    field(EGU,  "")
+}
+
+record(bo, "$(BASE):OPEN_VALVE") {
+    field(DESC, "VAT590, Open valve")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:OPEN $(PORT)")
+}
+
+record(bo, "$(BASE):CLOSE_VALVE") {
+    field(DESC, "VAT590, Close valve")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:CLOSE $(PORT)")
+}
+
+record(bo, "$(BASE):HOLD_VALVE") {
+    field(DESC, "VAT590, Hold valve")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:HOLD $(PORT)")
+}
+
+record(ao, "$(BASE):SET_POS_LIMIT_OPEN") {
+    field(DESC, "VAT590, Set position limit open")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_POS_LIM $(PORT)")
+    field(DRVH, "100000")
+    field(DRVL, "1")
+}
+
+record(ai, "$(BASE):GET_POS_LIMIT_OPEN") {
+    field(DESC, "VAT590, Get position limit open")
+    field(DTYP, "stream")
+    field(INP,  "@vat590.proto VATCI:GET_POS_LIM $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+}
+
+record(stringin, "$(BASE):GET_SENS_CFG") {
+    field(DESC, "VAT590, Sensor configuration")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_SENS_CFG($(BASE),GET_SENS_OPR,GET_ZERO_STATUS,GET_SENS_SC_RATIO) $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(mbbi, "$(BASE):GET_SENS_OPR") {
+    field(DESC, "VAT590, Sensor operation mode")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "NO SENSOR")
+    field(ONST, "1 SENS OPR(IN1)")
+    field(TWST, "2 SENS OPR w/ CHANGEOVER")
+    field(THST, "1 SENS OPR(IN2)")
+    field(FRST, "2 SENS OPR w/ CHANGEOVER")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_SENS_OPR") {
+    field(DESC, "VAT590, Set access mode")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_SENS_OPR $(PORT)")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(ZRST, "NO SENSOR")
+    field(ONST, "1 SENS OPR(IN1)")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+}
+
+record(bi, "$(BASE):GET_ZERO_STATUS") {
+    field(DESC, "VAT590, Zeroing status")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZNAM, "DISABLED")
+    field(ONAM, "ENABLED")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_ZERO_MODE") {
+    field(DESC, "VAT590, Set zeroing")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_ZERO_MODE $(PORT)")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(ZRST, "DISABLED")
+    field(ONST, "ENABLED")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+}
+
+record(ai, "$(BASE):GET_SENS_SC_RATIO") {
+    field(DESC, "VAT590, Pressure sensor scale ratio")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_SENS_SC_RATIO") {
+    field(DESC, "VAT590, Set pressure sensor scale ratio")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_SC_RATIO $(PORT)")
+    field(SCAN, "Passive")
+    field(DRVH, "100000")
+    field(DRVL, "1000")
+}
+
+record(stringin, "$(BASE):GET_SENS_SC") {
+    field(DESC, "VAT590, Pressure sensor scale configuration")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_SENS_SC($(BASE),GET_SC_VALUE,GET_SC_EXP_SIGN,GET_SC_EXP,GET_SC_UNIT) $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(stringout, "$(BASE):SET_SENS_SC") {
+    field(DESC, "VAT590, Set Pressure sensor scale configuration")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_SENS_SC($(BASE),SET_SC_VALUE,SET_SC_EXP_SIGN,SET_SC_EXP,SET_SC_UNIT) $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(ai, "$(BASE):GET_SC_VALUE") {
+    field(DESC, "VAT590, Pressure sensor scale max value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_SC_VALUE") {
+    field(DESC, "VAT590, Set pressure sensor scale max value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+    field(DRVH, "99999")
+    field(DRVL, "1")
+}
+
+record(bi, "$(BASE):GET_SC_EXP_SIGN") {
+    field(DESC, "VAT590, Pressure sensor scale exponent sign")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZNAM, "-")
+    field(ONAM, "+")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(bo, "$(BASE):SET_SC_EXP_SIGN") {
+    field(DESC, "VAT590, Set Pressure sensor scale exponent sign")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZNAM, "-")
+    field(ONAM, "+")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(mbbi, "$(BASE):GET_SC_EXP") {
+    field(DESC, "VAT590, Pressure sensor scale exponent")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "1")
+    field(ONST, "10")
+    field(TWST, "100")
+    field(THST, "1000")
+    field(FRST, "10000")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_SC_EXP") {
+    field(DESC, "VAT590, Pressure sensor scale exponent")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "1")
+    field(ONST, "10")
+    field(TWST, "100")
+    field(THST, "1000")
+    field(FRST, "10000")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbi, "$(BASE):GET_SC_UNIT") {
+    field(DESC, "VAT590, Pressure sensor unit")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(ZRST, "Pa")
+    field(ONST, "bar")
+    field(TWST, "mbar")
+    field(THST, "ubar")
+    field(FRST, "Torr")
+    field(FVST, "mTorr")
+    field(SXST, "atm")
+    field(SVST, "psi")
+    field(EIST, "psf")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_SC_UNIT") {
+    field(DESC, "VAT590, Set Pressure sensor unit")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(ZRST, "Pa")
+    field(ONST, "bar")
+    field(TWST, "mbar")
+    field(THST, "ubar")
+    field(FRST, "Torr")
+    field(FVST, "mTorr")
+    field(SXST, "atm")
+    field(SVST, "psi")
+    field(EIST, "psf")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+}
+
+record(stringin, "$(BASE):GET_SENS_LIN") {
+    field(DESC, "VAT590, Pressure sensor scale linearization")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_SENS_LIN($(BASE),GET_LOG_RES,GET_FULL_SCALE) $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(stringout, "$(BASE):SET_SENS_LIN") {
+    field(DESC, "VAT590, Set Pressure sensor scale linearization")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_SENS_LIN($(BASE),SET_LOG_RES,SET_FULL_SCALE) $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(ai, "$(BASE):GET_LOG_RES") {
+    field(DESC, "VAT590, Pressure sensor linearizing value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_LOG_RES") {
+    field(DESC, "VAT590, Set pressure sensor linearizing value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+    field(DRVH, "9999")
+    field(DRVL, "0")
+}
+
+record(ai, "$(BASE):GET_FULL_SCALE") {
+    field(DESC, "VAT590, Pressure sensor scale max value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_FULL_SCALE") {
+    field(DESC, "VAT590, Set pressure sensor scale max value")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+    field(DRVH, "9999")
+    field(DRVL, "1")
+}
+
+record(mbbo, "$(BASE):SET_SENS_AVG_T") {
+    field(DESC, "VAT590, Set averaging time of sensor signal")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_SENS_AVG_T $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(NIVL, "9")
+    field(TEVL, "10")
+    field(ZRST, "0.0 sec")
+    field(ONST, "0.1 sec")
+    field(TWST, "0.2 sec")
+    field(THST, "0.3 sec")
+    field(FRST, "0.4 sec")
+    field(FVST, "0.5 sec")
+    field(SXST, "0.6 sec")
+    field(SVST, "0.7 sec")
+    field(EIST, "0.8 sec")
+    field(NIST, "0.9 sec")
+    field(TEST, "1.0 sec")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+    field(NISV, "NO_ALARM")
+    field(TESV, "NO_ALARM")
+}
+
+record(mbbi, "$(BASE):GET_SENS_AVG_T") {
+    field(DESC, "VAT590, Averaging time of sensor signal")
+    field(DTYP, "stream")
+    field(INP,  "@vat590.proto VATCI:GET_SENS_AVG_T $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(NIVL, "9")
+    field(TEVL, "10")
+    field(ZRST, "0.0 sec")
+    field(ONST, "0.1 sec")
+    field(TWST, "0.2 sec")
+    field(THST, "0.3 sec")
+    field(FRST, "0.4 sec")
+    field(FVST, "0.5 sec")
+    field(SXST, "0.6 sec")
+    field(SVST, "0.7 sec")
+    field(EIST, "0.8 sec")
+    field(NIST, "0.9 sec")
+    field(TEST, "1.0 sec")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+    field(NISV, "NO_ALARM")
+    field(TESV, "NO_ALARM")
+    field(PINI, "YES")
+}
+
+record(stringin, "$(BASE):GET_COMM_RNG") {
+    field(DESC, "VAT590, Communication range for POSITION and PRESSURE")
+    field(DTYP, "stream")
+    field(INP, "@vat590.proto VATCI:GET_COMM_RNG($(BASE),GET_POS_RNG,GET_P_RNG) $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(PINI, "YES")
+}
+
+record(mbbi, "$(BASE):GET_POS_RNG") {
+    field(DESC, "VAT590, Max range for POSITION")
+    field(DTYP, "Raw Soft Channel")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "1000")
+    field(ONST, "10000")
+    field(TWST, "100000")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbo, "$(BASE):SET_POS_RNG") {
+    field(DESC, "VAT590, Set Max range for POSITION")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_POS_RNG($(BASE),GET_P_RNG) $(PORT)")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "1000")
+    field(ONST, "10000")
+    field(TWST, "100000")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(ai, "$(BASE):GET_P_RNG") {
+    field(DESC, "VAT590, Max range for PRESSURE")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_P_RNG") {
+    field(DESC, "VAT590, Set Max range for PRESSURE")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_P_RNG($(BASE),GET_POS_RNG) $(PORT)")
+    field(SCAN, "Passive")
+    field(DRVH, "100000")
+    field(DRVL, "1000")
+}
+
+record(bo, "$(BASE):ZERO") {
+    field(DESC, "VAT590, ZERO to correct zero procedure")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:ZERO $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(ao, "$(BASE):SET_PRESSURE_ALGN") {
+    field(DESC, "VAT590, Align pressure to certain value")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_PRESSURE_ALGN $(PORT)")
+    field(SCAN, "Passive")
+    field(DRVH, "$(BASE):GET_P_RNG")
+    field(DRVL, "0")
+}
+
+record(ai, "$(BASE):GET_VAL_SPEED") {
+    field(DESC, "VAT590, Get valve actuating speed")
+    field(DTYP, "stream")
+    field(INP,  "@vat590.proto VATCI:GET_VAL_SPEED $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+}
+
+record(ao, "$(BASE):SET_VAL_SPEED") {
+    field(DESC, "VAT590, Set valve actuating speed")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_VAL_SPEED $(PORT)")
+    field(SCAN, "Passive")
+    field(DRVH, "1000")
+    field(DRVL, "1")
+}
+
+record(bo, "$(BASE):RESET_WARNINGS") {
+    field(DESC, "VAT590, Reset warnings")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:RESET_WARN $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(bo, "$(BASE):RESET_ERRORS") {
+    field(DESC, "VAT590, Reset warnings")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:RESET_ERR $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(bo, "$(BASE):RST_ERR_WARN") {
+    field(DESC, "VAT590, Reset warnings")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:RST_ERR_WARN $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(mbbi, "$(BASE):GET_ACT_PCTRL") {
+    field(DESC, "VAT590, Get active pressure controller")
+    field(DTYP, "stream")
+    field(INP,  "@vat590.proto VATCI:GET_ACT_PCTRL $(PORT)")
+    field(SCAN, "$(CSCAN,recursive) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "Adaptive D/S")
+    field(ONST, "Fixed 1")
+    field(TWST, "Fixed 2")
+    field(THST, "Soft pump")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(PINI, "YES")
+}
+
+record(mbbo, "$(BASE):SET_ACT_PCTRL") {
+    field(DESC, "VAT590, Set active pressure controller")
+    field(DTYP, "stream")
+    field(OUT,  "@vat590.proto VATCI:SET_ACT_PCTRL $(PORT)")
+    field(SCAN, "Passive")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "Adaptive D/S")
+    field(ONST, "Fixed 1")
+    field(TWST, "Fixed 2")
+    field(THST, "Soft pump")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
