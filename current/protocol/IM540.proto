@@ -2,7 +2,28 @@
 #
 #####
 # Interface: RS232
+# Default: 9600,8 data bits,No partiy, 1 stop bit
+# TERMINOLOGY
 #
+# CTRL
+# Char    VALUE    SIGNIFICANCE
+# <ETX>   03h      End of text. Interface reset. (Deletes the input buffer contents of the IM 540, does not generate any further response)
+# <ENQ>   05h      Enquiry. Request to transfer the output buffer contents of the IM 540.
+# <ACK>   06h      Acknowledge.
+# <NAK>   15h      Negative Acknowledge.
+
+# Communication sequence
+# Successfull sequence
+# S: COMMAND<CR><LF>
+# R: <ACK><CR><LF>
+# S: <ENQ><CR><LF>
+# R: RESPONSE_ON_COMMAND<CR><LF>
+
+# Negative sequence
+# S: COMMAND<CR><LF>
+# R: <NAK><CR><LF>
+# S: <ENQ><CR><LF>
+# R: XX<CR><LF> (XX = Error code)
 
 InTerminator  = CR LF;
 OutTerminator = CR LF;

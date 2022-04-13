@@ -1,13 +1,13 @@
-#!$$IOCTOP/bin/$$IF(ARCH,$$ARCH,linux-x86_64)/leyboldim540
+#!/reg/g/pcds/epics-dev/janezg/git_iocs/ioc-leyboldim540/current/bin/rhel7-x86_64/leyboldim540
 
 < envPaths
-epicsEnvSet("IOCNAME", "$$IOCNAME" )
-epicsEnvSet("ENGINEER", "$$ENGINEER" )
-epicsEnvSet("LOCATION", "$$LOCATION" )
+epicsEnvSet("IOCNAME", "ioc-leyboldim540" )
+epicsEnvSet("ENGINEER", "enginner_name (shortname)" )
+epicsEnvSet("LOCATION", "Somewhere Over the Rainbow" )
 epicsEnvSet("IOCSH_PS1", "$(IOCNAME)> " )
-epicsEnvSet("IOC_PV", "$$IOC_PV")
-epicsEnvSet("IOCTOP", "$$IOCTOP")
-epicsEnvSet("TOP", "$$TOP")
+epicsEnvSet("IOC_PV", "IOC:TST:TMO")
+epicsEnvSet("IOCTOP", "/reg/g/pcds/epics-dev/janezg/git_iocs/ioc-leyboldim540/current")
+epicsEnvSet("TOP", "/reg/g/pcds/epics-dev/janezg/git_iocs/ioc-leyboldim540/current/children/build")
 epicsEnvSet(streamDebug, 0)
 ## Add the path to the protocol files
 epicsEnvSet("STREAM_PROTOCOL_PATH", "$(IOCTOP)/protocol")
@@ -26,25 +26,13 @@ leyboldim540_registerRecordDeviceDriver(pdbbase)
 # Asyn support
 
 # Initialize IP Asyn support
-$$LOOP(LEYBOLD)
-drvAsynIPPortConfigure("LEYBOLD$$INDEX","$$PORT TCP",0,0,0)
-$$ENDLOOP(LEYBOLD)
+drvAsynIPPortConfigure("LEYBOLD0","ser-tmo-04:4010 TCP",0,0,0)
 
-$$LOOP(LEYBOLD)
-$$IF(ASYNTRACE)
-asynSetTraceFile("LEYBOLD$$INDEX", 0, "$(IOC_DATA)/$(IOCNAME)/iocInfo/asyn$$PORT.log")
-asynSetTraceIOMask("LEYBOLD$$INDEX", 0, 0x6)
-asynSetTraceMask  ("LEYBOLD$$INDEX", 0, 0x9) # log everything
-$$ELSE(ASYNTRACE)
-$$ENDIF(ASYNTRACE)
-$$ENDLOOP(LEYBOLD)
 
 # Load record instances
 dbLoadRecords("db/iocSoft.db",             "IOC=$(IOC_PV)")
 dbLoadRecords("db/save_restoreStatus.db",  "IOC=$(IOC_PV)")
-$$LOOP(LEYBOLD)
-dbLoadRecords("db/leyboldim540.db","DEV=$$BASE,PORT=LEYBOLD$$INDEX,DSCAN=$$IF(DATASCAN,$$DATASCAN,1),CSCAN=$$IF(CONFSCAN,$$CONFSCAN,5)")
-$$ENDLOOP(LEYBOLD)
+dbLoadRecords("db/leyboldim540.db","DEV=TMO:TESTSTAND:01,PORT=LEYBOLD0,DSCAN=2,CSCAN=6")
 
 # Setup autosave
 set_savefile_path( "$(IOC_DATA)/$(IOCNAME)/autosave" )
