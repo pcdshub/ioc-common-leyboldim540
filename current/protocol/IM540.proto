@@ -1,10 +1,16 @@
 # Leybold IM540 Stream Protocol File 
 #
+InTerminator  = CR LF;
+OutTerminator = CR LF;
+ReplyTimeout  =  1000;
+ReadTimeout   =  300;
+WriteTimeout  =  300;
+ExtraInput    = Ignore;
+
 #####
 # Interface: RS232
 # Default: 9600,8 data bits,No partiy, 1 stop bit
 # TERMINOLOGY
-#
 # CTRL
 # Char    VALUE    SIGNIFICANCE
 # <ETX>   03h      End of text. Interface reset. (Deletes the input buffer contents of the IM 540, does not generate any further response)
@@ -25,119 +31,67 @@
 # S: <ENQ><CR><LF>
 # R: XX<CR><LF> (XX = Error code)
 
-InTerminator  = CR LF;
-OutTerminator = CR LF;
-ReplyTimeout  =  1000;
-ReadTimeout   =  300;
-WriteTimeout  =  300;
-ExtraInput    = Ignore;
 
-VATCI:SEND           { out "%s"; in "%(\$1:\$2.VAL)24c"; @replytimeout{;}; @readtimeout{;}; }
-VATCI:RCVE           { in "%24c"; @replytimeout{;}; @readtimeout{;}; }
+SEND           { out "%s"; in "%(\$1:\$2.VAL)24c"; @replytimeout{;}; @readtimeout{;}; }
+RCVE           { in "%39c"; @replytimeout{;}; @readtimeout{;}; }
 
-VATCI:GET_IDN       { out "i:83";           in "i:83%20s"; }
-VATCI:GET_FW_CFG    { out "i:82";           in "i:82%8s"; }
-VATCI:GET_FW        { out "i:84";           in "i:84%6d"; }
-VATCI:GET_HW_CFG    { out "i:80";           in "i:80%(\$1:\$2.RVAL)1d%(\$1:\$3.RVAL)1d%(\$1:\$4.RVAL)1d%(\$1:\$5.RVAL)1d%*4c"; }
-VATCI:GET_STATUS    { out "i:30";           in "i:30%(\$1:\$2.RVAL)1d%(\$1:\$3.RVAL)1X%(\$1:\$4.RVAL)1d%(\$1:\$5.RVAL)1d%*3c%(\$1:\$6.RVAL)1d"; }
-VATCI:GET_PWRUP_CNT { out "i:72";           in "i:72%i"; }
-VATCI:GET_ISLN_CNT  { out "i:71";           in "i:71%i"; }
-VATCI:GET_THROT_CNT { out "i:70";           in "i:70%i"; }
-VATCI:GET_WARNINGS  { out "i:51";           in "i:51%(\$1:\$2.RVAL)1d%(\$1:\$3.RVAL)1d%(\$1:\$4.RVAL)1d%(\$1:\$5.RVAL)1d%*4c"; }
-VATCI:GET_ERRORS    { out "i:50";           in "i:50%3s"; }
-VATCI:GET_PSENS_VAL { out "i:64";           in "i:64%8d"; }
-VATCI:GET_PSENS_OFF { out "i:60";           in "i:60%8d"; }
-VATCI:GET_PRESSURE  { out "P:";             in "P:%8d"; }
-VATCI:GET_POSITION  { out "A:";             in "A:%6d"; }
-VATCI:GET_SETPOINT  { out "i:38";           in "i:38%8d"; }
-VATCI:GET_POS_LIM   { out "a:101A";         in "a:101A%6d"; }
+# Reset interface error 
+resetError          { out "REC,80";         in ACK; }  #Reset all errors
+resetDevice         { out "RES";            in ACK; }  #Reset the device. Trigger a software reset via Watchdog-Timeout
 
-
-VATCI:SET_POSITION  { out "R:%6i";          in "R:"; }
-VATCI:SET_PRESSURE  { out "S:%8d";          in "S:"; }
-VATCI:OPEN          { out "O:";             in "O:"; }
-VATCI:CLOSE         { out "C:";             in "C:"; }
-VATCI:HOLD          { out "H:";             in "H:"; }
-VATCI:SET_ACS_MODE  { out "c:010%1d";       in "c:01"; }
-VATCI:SET_POS_LIM   { out "a:101A%6d";      in "a:101A"; }
-
-
-LSCI:GET_IDN        { out "*IDN?";          in "%39c"; }
-LSCI:GET_TEMP       { out "TEMP?";          in "%f"; }
-LSCI:GET_SOLL       { out "SETP? \$1";      in "%f"; }
-LSCI:GET_MODE       { out "MODE?";          in "%{0|1|2}"; }
-LSCI:GET_TEMP_K     { out "KRDG? \$1";      in "%f"; }
-LSCI:GET_TEMP_C     { out "CRDG? \$1";      in "%f"; }
-LSCI:GET_TEMP_S     { out "SRDG? \$1";      in "%f"; }
-LSCI:GET_INTYPE     { out "INTYPE? \$1";    in "%d,%(\$2:GET_AUTORANGE_\$1.RVAL)d,%(\$2:GET_RAW_RANGE_\$1.VAL)d,%(\$2:GET_COMP_\$1.RVAL)d,%(\$2:GET_UNITS_\$1.RVAL)d"; }
-LSCI:GET_SENSOR     { out "INTYPE? \$1";    in "%d,%*d,%*d,%*d,%*d"; }
-LSCI:GET_AUTORANGE  { out "INTYPE? \$1";    in "%*d,%d,%*d,%*d,%*d"; }
-LSCI:GET_RANGE      { out "INTYPE? \$1";    in "%*d,%*d,%d,%*d,%*d"; }
-LSCI:GET_COMP       { out "INTYPE? \$1";    in "%*d,%*d,%*d,%d,%*d"; }
-LSCI:GET_UNIT       { out "INTYPE? \$1";    in "%*d,%*d,%*d,%*d,%d"; }
-LSCI:GET_OUTMODE    { out "OUTMODE? \$1";   in "%d,%(\$2:GET_INPUT_\$1.RVAL)d,%(\$2:GET_POWERUP_\$1.RVAL)d"; }
-LSCI:GET_CMODE      { out "OUTMODE? \$1";   in "%d,%*d,%*d"; }
-LSCI:GET_INPUT      { out "OUTMODE? \$1";   in "%*d,%d,%*d"; }
-LSCI:GET_POWERUP    { out "OUTMODE? \$1";   in "%*d,%*d,%d"; }
-LSCI:GET_RAMP       { out "RAMP? \$1";      in "%(\$2:GET_RAMP_STAT_\$1.RVAL)d,%f"; }
-LSCI:GET_RAMP_STAT  { out "RAMP? \$1";      in "%d,%*f"; }
-LSCI:GET_RAMP_VAL   { out "RAMP? \$1";      in "%*d,%f"; }
-LSCI:GET_HTR_RANGE  { out "RANGE? \$1";     in "%d"; }
-LSCI:GET_HTR        { out "HTR? \$1";       in "%f"; }
-LSCI:GET_HTRST      { out "HTRST? \$1";     in "%d"; }
-LSCI:GET_INNAME     { out "INNAME? \$1";    in "%39c"; }
-LSCI:GET_PID        { out "PID? \$1";       in "%f,%(\$2:GET_PID_I_\$1.VAL)f,%(\$2:GET_PID_D_\$1.VAL)f"; }
-LSCI:GET_PID_P      { out "PID? \$1";       in "%f,%*f,%*f"; }
-LSCI:GET_PID_I      { out "PID? \$1";       in "%*f,%f,%*f"; }
-LSCI:GET_PID_D      { out "PID? \$1";       in "%*f,%*f,%f"; }
-LSCI:GET_MOUT       { out "MOUT? \$1";      in "%f"; }
-LSCI:GET_AOUT       { out "AOUT? \$1";      in "%f"; }
-LSCI:GET_CURVE      { out "INCRV? \$1";     in "%d"; }
-LSCI:GET_FILTER     { out "FILTER? \$1";    in "%d,%(\$2:GET_FLT_PTS_\$1.VAL)d,%(\$2:GET_FLT_WIN_\$1.VAL)f"; }
-LSCI:GET_FLT_STAT   { out "FILTER? \$1";    in "%d,%*d,%*f"; }
-LSCI:GET_FLT_PTS    { out "FILTER? \$1";    in "%*d,%d,%*f"; }
-LSCI:GET_FLT_WIN    { out "FILTER? \$1";    in "%*d,%*d,%f"; }
-LSCI:GET_HTRSET     { out "HTRSET? \$1";    in "%d,%(\$2:GET_MAX_CUR_\$1.RVAL)d,%(\$2:GET_USR_CUR_\$1.VAL)f,%(\$2:GET_HTR_MODE_\$1.RVAL)d"; }
-LSCI:GET_HTR_RES    { out "HTRSET? \$1";    in "%d,%*d,%*f,%*d"; }
-LSCI:GET_MAX_CUR    { out "HTRSET? \$1";    in "%*d,%d,%*f,%*d"; }
-LSCI:GET_USR_CUR    { out "HTRSET? \$1";    in "%*d,%*d,%f,%*d"; }
-LSCI:GET_HTR_MODE   { out "HTRSET? \$1";    in "%*d,%*d,%*f,%d"; }
-LSCI:GET_ANALOG     { out "ANALOG? \$1";    in "%*d,%d,%(\$2:GET_ALG_HIGH_\$1.VAL)f,%(\$2:GET_ALG_LOW_\$1.VAL)f,%(\$2:GET_ALG_POL_\$1.RVAL)d"; }
-LSCI:GET_ALG_UNITS  { out "ANALOG? \$1";    in "%*d,%d,%*f,%*f,%*d"; }
-LSCI:GET_ALG_HIGH   { out "ANALOG? \$1";    in "%*d,%*d,%f,%*f,%*d"; }
-LSCI:GET_ALG_LOW    { out "ANALOG? \$1";    in "%*d,%*d,%*f,%f,%*d"; }
-LSCI:GET_ALG_POL    { out "ANALOG? \$1";    in "%*d,%*d,%*f,%*f,%d"; }
-LSCI:GET_AUTOTUNE   { out "TUNEST?";        in "%d,%(\$1:GET_TUNE_OUT.RVAL)d,%(\$1:GET_TUNE_ERR.RVAL)d,%(\$1:GET_TUNE_STAGE.VAL)d"; }
-
-
-LSCI:SET_MODE       { out "MODE %{0|1|2}"; } 
-LSCI:SET_SOLL       { out "SETP \$1,%f"; }
-LSCI:SET_INNAME     { out 'INNAME \$1,"%s"'; }
-LSCI:SET_SENSOR     { out "INTYPE \$1,%d,%(\$2:GET_AUTORANGE_\$1.RVAL)d,%(\$2:GET_RAW_RANGE_\$1.VAL)d,%(\$2:GET_COMP_\$1.RVAL)d,%(\$2:GET_UNITS_\$1.RVAL)d"; }
-LSCI:SET_AUTORANGE  { out "INTYPE \$1,%(\$2:GET_SENSOR_\$1.RVAL)d,%d,%(\$2:GET_RAW_RANGE_\$1.VAL)d,%(\$2:GET_COMP_\$1.RVAL)d,%(\$2:GET_UNITS_\$1.RVAL)d"; }
-LSCI:SET_RANGE      { out "INTYPE \$1,%(\$2:GET_SENSOR_\$1.RVAL)d,%(\$2:GET_AUTORANGE_\$1.RVAL)d,%d,%(\$2:GET_COMP_\$1.RVAL)d,%(\$2:GET_UNITS_\$1.RVAL)d"; }
-LSCI:SET_COMP       { out "INTYPE \$1,%(\$2:GET_SENSOR_\$1.RVAL)d,%(\$2:GET_AUTORANGE_\$1.RVAL)d,%(\$2:GET_RAW_RANGE_\$1.VAL)d,%d,%(\$2:GET_UNITS_\$1.RVAL)d"; }
-LSCI:SET_UNIT       { out "INTYPE \$1,%(\$2:GET_SENSOR_\$1.RVAL)d,%(\$2:GET_AUTORANGE_\$1.RVAL)d,%(\$2:GET_RAW_RANGE_\$1.VAL)d,%(\$2:GET_COMP_\$1.RVAL)d,%d"; }
-LSCI:SET_CMODE      { out "OUTMODE \$1,%d,%(\$2:GET_INPUT_\$1.RVAL)d,%(\$2:GET_POWERUP_\$1.RVAL)d"; }
-LSCI:SET_INPUT      { out "OUTMODE \$1,%(\$2:GET_CMODE_\$1.RVAL)d,%d,%(\$2:GET_POWERUP_\$1.RVAL)d"; }
-LSCI:SET_POWERUP    { out "OUTMODE \$1,%(\$2:GET_CMODE_\$1.RVAL)d,%(\$2:GET_INPUT_\$1.RVAL)d,%d"; }
-LSCI:SET_RAMP_STAT  { out "RAMP \$1,%d,%(\$2:GET_RAMP_\$1.VAL)f"; }
-LSCI:SET_RAMP_VAL   { out "RAMP \$1,%(\$2:GET_RAMP_STAT_\$1.RVAL)d,%f"; }
-LSCI:SET_HTR_RANGE  { out "RANGE \$1,%d"; }
-LSCI:SET_PID_P      { out "PID \$1,%f,%(\$2:GET_PID_I_\$1.VAL)f,%(\$2:GET_PID_D_\$1.VAL)f"; }
-LSCI:SET_PID_I      { out "PID \$1,%(\$2:GET_PID_P_\$1.VAL)f,%f,%(\$2:GET_PID_D_\$1.VAL)f"; }
-LSCI:SET_PID_D      { out "PID \$1,%(\$2:GET_PID_P_\$1.VAL)f,%(\$2:GET_PID_I_\$1.VAL)f,%f"; }
-LSCI:SET_MOUT       { out "MOUT \$1,%f"; }
-LSCI:SET_CURVE      { out "INCRV \$1,%d"; }
-LSCI:SET_FLT_STAT   { out "FILTER \$1,%d,%(\$2:GET_FLT_PTS_\$1.VAL)d,%(\$2:GET_FLT_WIN_\$1.VAL)f"; }
-LSCI:SET_FLT_PTS    { out "FILTER \$1,%(\$2:GET_FILTER_\$1.RVAL)d,%d,%(\$2:GET_FLT_WIN_\$1.VAL)f"; }
-LSCI:SET_FLT_WIN    { out "FILTER \$1,%(\$2:GET_FILTER_\$1.RVAL)d,%(\$2:GET_FLT_PTS_\$1.VAL)d,%f"; }
-LSCI:SET_HTR_RES    { out "HTRSET \$1,%d,%(\$2:GET_MAX_CUR_\$1.RVAL)d,%(\$2:GET_USR_CUR_\$1.VAL)f,%(\$2:GET_HTR_MODE_\$1.RVAL)d"; }
-LSCI:SET_MAX_CUR    { out "HTRSET \$1,%(\$2:GET_HTR_RES_\$1.RVAL)d,%d,%(\$2:GET_USR_CUR_\$1.VAL)f,%(\$2:GET_HTR_MODE_\$1.RVAL)d"; }
-LSCI:SET_USR_CUR    { out "HTRSET \$1,%(\$2:GET_HTR_RES_\$1.RVAL)d,%(\$2:GET_MAX_CUR_\$1.RVAL)d,%f,%(\$2:GET_HTR_MODE_\$1.RVAL)d"; }
-LSCI:SET_HTR_MODE   { out "HTRSET \$1,%(\$2:GET_HTR_RES_\$1.RVAL)d,%(\$2:GET_MAX_CUR_\$1.RVAL)d,%(\$2:GET_USR_CUR_\$1.VAL)f,%d"; }
-LSCI:SET_ALG_UNITS  { out "ANALOG \$1,%(\$2:GET_INPUT_\$1.RVAL)d,%d,%(\$2:GET_ALG_HIGH_\$1.VAL)f,%(\$2:GET_ALG_LOW_\$1.VAL)f,%(\$2:GET_ALG_POL_\$1.RVAL)d"; }
-LSCI:SET_ALG_HIGH   { out "ANALOG \$1,%(\$2:GET_INPUT_\$1.RVAL)d,%(\$2:GET_ALG_UNITS_\$1.RVAL)d,%f,%(\$2:GET_ALG_LOW_\$1.VAL)f,%(\$2:GET_ALG_POL_\$1.RVAL)d"; }
-LSCI:SET_ALG_LOW    { out "ANALOG \$1,%(\$2:GET_INPUT_\$1.RVAL)d,%(\$2:GET_ALG_UNITS_\$1.RVAL)d,%(\$2:GET_ALG_HIGH_\$1.VAL)f,%f,%(\$2:GET_ALG_POL_\$1.RVAL)d"; }
-LSCI:SET_ALG_POL    { out "ANALOG \$1,%(\$2:GET_INPUT_\$1.RVAL)d,%(\$2:GET_ALG_UNITS_\$1.RVAL)d,%(\$2:GET_ALG_HIGH_\$1.VAL)f,%(\$2:GET_ALG_LOW_\$1.VAL)f,%d";  }
-LSCI:AUTOTUNE       { out "ATUNE \$1,%d" }
+# Device data
+getERR              { out "ERR";                       #Get serial error code
+                      in  ACK;
+                      out ENQ;
+                      in  "%X";                        #2-digit hex number
+                    }
+getGDE              { out "GDE";                       #Get global device error 
+                      in  ACK;
+                      out ENQ;
+                      in  "%X"; #4-digit hex number
+                    }
+getISE              { out "ISE";                       #Ioni supply Errors
+                      in  ACK;
+                      out ENQ;
+                      in  "%X"; #4-digit hex number
+                    }
+getISW              { out "ISW";                       #Ioni supply Warnings
+                      in  ACK;
+                      out ENQ;
+                      in  "%X"; #4-digit hex number
+                    }
+#getDegas            { out "DGS";                       #Execute/read degassing status
+#                     in  ACK;
+#                     out ENQ;
+#                      in  "%(degas_status_RBV)d";
+#                    }
+#setDegas            { out "DGS,%{0|1}";
+#                      in  ACK;
+#                     out ENQ;
+#                     in  "%(degas_status_RBV)d";
+#                    }
+getEMI              { out "EMI,\$1";                   #Switch ON/OFF emission, Read Emission status
+                      in  ACK;
+                      out ENQ;
+                      in  "%*d,%d";
+                    } 
+setEMI              { out "EMI,\$1,%d";
+                      in  ACK;
+                      out ENQ;
+                      in  "%*d,%*d";
+                    }
+getOFC              { out "OFC,\$1";                   #Offset correction Ch1-Ch4
+                      in  ACK;
+                      out ENQ;
+                      in  "%d";
+                    }
+setOFC              { out "OFC,\$1,%d";
+                      in  ACK;
+                      out ENQ;
+                      in  "%*d";
+                    }
+getPRX              { out "PRX";                        #Get pressure reading and status from all 4 CH
+                      in  ACK;
+                      out ENQ;
+                      in  "%(\$1.RVAL)X,%(\$2.VAL)E,%(\$3.RVAL)X,%(\$4.VAL)E,%(\$5.RVAL)X,%(\$6.VAL)E,%(\$7.RVAL)X,%(\$8.VAL)E";
+                    }

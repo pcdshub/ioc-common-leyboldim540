@@ -1,0 +1,7 @@
+file leyboldim540.template
+{
+    pattern
+    { DEV,      PORT,       CSCAN,     DSCAN    }
+    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN) }
+}
+

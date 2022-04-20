@@ -1,0 +1,429 @@
+#
+# Leybold IM540 DataDEV
+#
+#  DEV
+#  	EPICS prefix
+#  PORT
+#  	ASYN PORT_NAME
+#
+#
+record(stringout, "$(DEV):SEND") {
+    field(DESC, "IM540, send string")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto SEND($(DEV),RCVE) $(PORT)")
+    field(SCAN, "Passive")
+}
+
+record(stringin, "$(DEV):RCVE") {
+    field(DESC, "IM540, send/receive")
+    field(DTYP, "Soft Channel")
+    field(SCAN, "Passive")
+}
+
+record(bo, "$(DEV):RESET_ERR") {
+    field(DESC, "Reset errors command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@IM540.proto resetError $(PORT)")
+    field(ZNAM, "RESET_RS232")
+    field(ONAM, "RESET_RS232")
+}
+
+record(bo, "$(DEV):RESET_DEVICE") {
+    field(DESC, "Reset device command")
+    field(DTYP, "stream")
+    field(HIGH, "1")
+    field(OUT, "@IM540.proto resetDevice $(PORT)")
+    field(ZNAM, "RESET")
+    field(ONAM, "RESET")
+}
+
+record(mbbiDirect, "$(DEV):GDE")
+{
+    field(DESC, "Global device Error")
+    field(SCAN, "$(CSCAN) second")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGDE $(PORT)")
+    field(FLNK, "$(DEV):ERR:WDG")
+}
+
+record(bi, "$(DEV):ERR:WDG")
+{
+    field(DESC, "Watchdog status")
+    field(INP,  "$(DEV):GDE.B0 CPP NMS")
+    field(FLNK, "$(DEV):ERR:ROM")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:ROM")
+{
+    field(DESC, "ROM Error")
+    field(INP,  "$(DEV):GDE.B1 CPP NMS")
+    field(FLNK, "$(DEV):ERR:RAM")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:RAM")
+{
+    field(DESC, "RAM Error")
+    field(INP,  "$(DEV):GDE.B2 CPP NMS")
+    field(FLNK, "$(DEV):ERR:CRC")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:CRC")
+{
+    field(DESC, "CRC test Error")
+    field(INP,  "$(DEV):GDE.B3 CPP NMS")
+    field(FLNK, "$(DEV):ERR:SPI")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:SPI")
+{
+    field(DESC, "SPI Error")
+    field(INP,  "$(DEV):GDE.B4 CPP NMS")
+    field(FLNK, "$(DEV):ERR:NEW_SENS")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:NEW_SENS")
+{
+    field(DESC, "New sensor has been detected")
+    field(INP,  "$(DEV):GDE.B5 CPP NMS")
+    field(FLNK, "$(DEV):ERR:EMI_OFF")	
+    field(ZNAM, "NO_NEW_SENSOR")
+    field(ONAM, "NEW_SENSOR")
+}
+
+record(bi, "$(DEV):ERR:EMI_OFF")
+{
+    field(DESC, "Emission off because Pressure too high")
+    field(INP,  "$(DEV):GDE.B6 CPP NMS")
+    field(FLNK, "$(DEV):ERR:EMI_OFF_KEY")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:EMI_OFF_KEY")
+{
+    field(DESC, "Emission shutdown via keyboard")
+    field(INP,  "$(DEV):GDE.B7 CPP NMS")
+    field(FLNK, "$(DEV):ERR:OVERTEMP")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:OVERTEMP")
+{
+    field(DESC, "Overtemperature of the power supply")
+    field(INP,  "$(DEV):GDE.B8 CPP NMS")
+    field(FLNK, "$(DEV):ERR:SENS_STATUS_CHGD")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:SENS_STATUS_CHGD")
+{
+    field(DESC, "Senor status of the CH1-4 has changed")
+    field(INP,  "$(DEV):GDE.B9 CPP NMS")
+    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH1")
+    field(ZNAM, "NO_CHANGE")
+    field(ONAM, "STATUS_CHNAGED")
+}
+
+record(bi, "$(DEV):ERR:SENS_STATUS_CH1")
+{
+    field(DESC, "Senor status on CH1 chnaged")
+    field(INP,  "$(DEV):GDE.BA CPP NMS")
+    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH2")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:SENS_STATUS_CH2")
+{
+    field(DESC, "Senor status on CH2 chnaged")
+    field(INP,  "$(DEV):GDE.BB CPP NMS")
+    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH3")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:SENS_STATUS_CH3")
+{
+    field(DESC, "Senor status on CH3 chnaged")
+    field(INP,  "$(DEV):GDE.BC CPP NMS")
+    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH4")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:SENS_STATUS_CH4")
+{
+    field(DESC, "Senor status on CH4 chnaged")
+    field(INP,  "$(DEV):GDE.BD CPP NMS")
+    field(FLNK, "$(DEV):ERR:PS")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:PS")
+{
+    field(DESC, "PS caused err. or wrn")
+    field(INP,  "$(DEV):GDE.BE CPP NMS")
+    field(FLNK, "$(DEV):ERR:IONIVAC_PS")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ERR:IONIVAC_PS")
+{
+    field(DESC, "Ionivac PS has caused an err. or wrn.")
+    field(INP,  "$(DEV):GDE.BF CPP NMS")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(mbbiDirect, "$(DEV):ISE")
+{
+    field(DESC, "Ioni Supply Errors")
+#    field(SCAN, "$(CSCAN) second")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getISE $(PORT)")
+    field(FLNK, "$(DEV):ISE_ERR:AV")
+}
+
+record(bi, "$(DEV):ISE_ERR:AV")
+{
+    field(DESC, "Anode voltage error")
+    field(INP,  "$(DEV):ISE.B0 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:CV")
+{
+    field(DESC, "Cathode voltage error")
+    field(INP,  "$(DEV):ISE.B1 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:RV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:RV")
+{
+    field(DESC, "Reflector voltage error")
+    field(INP,  "$(DEV):ISE.B2 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:AC")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:AC")
+{
+    field(DESC, "Anode current error")
+    field(INP,  "$(DEV):ISE.B3 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:FV")
+{
+    field(DESC, "Filament voltage error")
+    field(INP,  "$(DEV):ISE.B4 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FC")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:FC")
+{
+    field(DESC, "Filament current error")
+    field(INP,  "$(DEV):ISE.B5 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FP")	
+    field(ZNAM, "NO_NEW_SENSOR")
+    field(ONAM, "NEW_SENSOR")
+}
+
+record(bi, "$(DEV):ISE_ERR:FP")
+{
+    field(DESC, "Filament power error")
+    field(INP,  "$(DEV):ISE.B6 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CRA")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:CRA")
+{
+    field(DESC, "Cathode regulator absolute error")
+    field(INP,  "$(DEV):ISE.B8 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CRD")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_ERR:CRD")
+{
+    field(DESC, "Cathode regulator deviation error")
+    field(INP,  "$(DEV):ISE.B9 CPP NMS")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(mbbiDirect, "$(DEV):ISW")
+{
+    field(DESC, "Ioni Supply Warnings")
+#    field(SCAN, "$(CSCAN) second")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getISW $(PORT)")
+    field(FLNK, "$(DEV):ISE_WRN:AV")
+}
+
+record(bi, "$(DEV):ISE_WRN:AV")
+{
+    field(DESC, "Anode voltage warning")
+    field(INP,  "$(DEV):ISW.B0 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:CV")
+{
+    field(DESC, "Cathode voltage warning")
+    field(INP,  "$(DEV):ISW.B1 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:RV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:RV")
+{
+    field(DESC, "Reflector voltage warning")
+    field(INP,  "$(DEV):ISW.B2 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:AC")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:AC")
+{
+    field(DESC, "Anode current warning")
+    field(INP,  "$(DEV):ISW.B3 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FV")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:FV")
+{
+    field(DESC, "Filament voltage warning")
+    field(INP,  "$(DEV):ISW.B4 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FC")	
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:FC")
+{
+    field(DESC, "Filament current warning")
+    field(INP,  "$(DEV):ISW.B5 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:FP")	
+    field(ZNAM, "NO_NEW_SENSOR")
+    field(ONAM, "NEW_SENSOR")
+}
+
+record(bi, "$(DEV):ISE_WRN:FP")
+{
+    field(DESC, "Filament power warning")
+    field(INP,  "$(DEV):ISW.B6 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CRA")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:CRA")
+{
+    field(DESC, "Cathode regulator absolute warning")
+    field(INP,  "$(DEV):ISW.B8 CPP NMS")
+    field(FLNK, "$(DEV):ISE_ERR:CRD")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bi, "$(DEV):ISE_WRN:CRD")
+{
+    field(DESC, "Cathode regulator deviation warning")
+    field(INP,  "$(DEV):ISW.B9 CPP NMS")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+}
+
+record(bo, "$(DEV):PRX")
+{
+    field(DESC, "Get status and P from all 4 CH")
+    field(SCAN, "$(DSCAN) second")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto getPRX($(DEV):STAT_CH1,$(DEV):PRESS_CH1,$(DEV):STAT_CH2,$(DEV):PRESS_CH2,$(DEV):STAT_CH3,$(DEV):PRESS_CH3,$(DEV):STAT_CH4,$(DEV):PRESS_CH4) $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH1")
+{
+    field(DESC, "CH1 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH1") {
+    field(DESC, "Measuring value on CH1")
+    field(DTYP, "Soft Channel")
+    field(EGU,  "")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH2")
+{
+    field(DESC, "CH2 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH2") {
+    field(DESC, "Measuring value on CH2")
+    field(DTYP, "Soft Channel")
+    field(EGU,  "")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH3")
+{
+    field(DESC, "CH3 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH3") {
+    field(DESC, "Measuring value on CH3")
+    field(DTYP, "Soft Channel")
+    field(EGU,  "")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH4")
+{
+    field(DESC, "CH4 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH4") {
+    field(DESC, "Measuring value on CH4")
+    field(DTYP, "Soft Channel")
+    field(EGU,  "")
+    field(PREC, "4")
+}
