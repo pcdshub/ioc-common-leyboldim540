@@ -1,0 +1,398 @@
+#
+# Leybold IM540
+#
+#  DEV
+#  	EPICS prefix
+#  PORT
+#  	ASYN PORT_NAME
+#  CH
+#   CHANNEL NUMBER
+#
+#
+record(mbbi, "$(DEV):GET_OFC_CH$(CH)") {
+    field(DESC, "Offset correction of CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "IGNORE")
+    field(ONST, "APPLY")
+    field(TWST, "OFFSET RUNNING")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(bo, "$(DEV):SET_OFC_CH$(CH)") {
+    field(DESC, "Set Offset correction of CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setOFC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_OFC_CH$(CH)")
+    field(ZNAM, "IGNORE")
+    field(ONAM, "APPLY")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_BCC_CH$(CH)") {
+    field(DESC, "Get const. emi current CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "AUTO")
+    field(ONST, "0.1 mA")
+    field(TWST, "1.0 mA")
+    field(THST, "10.0 mA")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+## Addressed sensor must be a BAG system (IE 414) (check if only CH1 and CH2 should be addressed here)
+record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
+    field(DESC, "Set const. emi current CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setBCC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_BCC_CH$(CH)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "AUTO")
+    field(ONST, "0.1 mA")
+    field(TWST, "1.0 mA")
+    field(THST, "10.0 mA")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+record(bi, "$(DEV):GET_CAO_CH$(CH)") {
+    field(DESC, "Get Offset auto correction CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+	field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+## Addressed sensor must be a CTR system (check if only CH3 and CH4 should be addressed here)
+record(bo, "$(DEV):SET_CAO_CH$(CH)") {
+    field(DESC, "Set Offset auto correction CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setCAO($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_CAO_CH$(CH)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(ai, "$(DEV):GET_SAC_$(CH)") {
+    field(DESC, "Get sens. amplification corr. CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSAC($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "")
+    field(PREC, "2")
+}
+
+record(ao, "$(DEV):SET_SAC_$(CH)") {
+    field(DESC, "Set sens. amplification corr. CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSAC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SAC_$(CH)")
+    field(DRVH, "9.99")
+    field(DRVL, "0.10")
+    field(EGU,  "")
+    field(PREC, "2")
+}
+
+record(mbbi, "$(DEV):GET_SCC_CH$(CH)") {
+    field(DESC, "Get CH that controls a sensor on CH(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "NOT_CNTRL")
+    field(ONST, "CNTRL BY CH1")
+    field(TWST, "CNTRL BY CH2")
+    field(THST, "CNTRL BY CH3")
+    field(FRST, "CNTRL BY CH4")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SCC_CH$(CH)") {
+    field(DESC, "Set CH that controls a sensor on CH(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "NOT_CNTRL")
+    field(ONST, "CNTRL BY CH1")
+    field(TWST, "CNTRL BY CH2")
+    field(THST, "CNTRL BY CH3")
+    field(FRST, "CNTRL BY CH4")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(ai, "$(DEV):GET_SCL_CH$(CH)")
+{
+    field(DESC, "Get sensor cntrl. lim. CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getRSC($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+}
+
+record(ai, "$(DEV):SCL_LOW_CH$(CH)")
+{
+    field(DESC, "Startup limit CH$(CH)")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+    field(EGU,  "")
+}
+
+record(ai, "$(DEV):SCL_HIGH_CH$(CH)")
+{
+    field(DESC, "Shutdown limit CH$(CH)")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+    field(EGU,  "")
+}
+
+## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
+record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)") {
+    field(DESC, "Set startup limit CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCL_LOW($(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+#    field(DRVH, "")
+#    field(DRVL, "")
+    field(EGU,  "")
+    field(PREC, "4")
+}
+
+## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
+record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)") {
+    field(DESC, "Set shutdown limit CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCL_HIGH($(CH),$(DEV):SCL_LOW_CH$(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+#    field(DRVH, "")
+#    field(DRVL, "")
+    field(EGU,  "")
+    field(PREC, "4")
+}
+
+record(mbbi, "$(DEV):GET_SCM_CH$(CH)") {
+    field(DESC, "Get sens. control mode CH(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSCM($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "MANUAL")
+    field(ONST, "SELF")
+    field(TWST, "AUTO")
+    field(THST, "HOT")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SCM_CH$(CH)") {
+    field(DESC, "Set sens. control mode CH(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCM($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "MANUAL")
+    field(ONST, "SELF")
+    field(TWST, "AUTO")
+    field(THST, "HOT")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_SGC_CH$(CH)") {
+    field(DESC, "Get sens. gas correction CH(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSCM($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(ZRST, "NONE")
+    field(ONST, "GAS_AR")
+    field(TWST, "GAS_H2")
+    field(THST, "GAS_HE")
+    field(FRST, "GAS_NE")
+    field(FVST, "GAS_KR")
+    field(SXST, "GAS_XE")
+    field(SVST, "GAS_CO2")
+    field(EIST, "GAS_USER")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SGC_CH$(CH)") {
+    field(DESC, "Set sens. gas correction CH(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCM($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_SGC_CH$(CH)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(SVVL, "7")
+    field(EIVL, "8")
+    field(ZRST, "NONE")
+    field(ONST, "GAS_AR")
+    field(TWST, "GAS_H2")
+    field(THST, "GAS_HE")
+    field(FRST, "GAS_NE")
+    field(FVST, "GAS_KR")
+    field(SXST, "GAS_XE")
+    field(SVST, "GAS_CO2")
+    field(EIST, "GAS_USER")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+    field(FVSV, "NO_ALARM")
+    field(SXSV, "NO_ALARM")
+    field(SVSV, "NO_ALARM")
+    field(EISV, "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_SMF_CH$(CH)") {
+    field(DESC, "Get measuring filter CH(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSMF($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "NONE")
+    field(ONST, "FAST")
+    field(TWST, "NORMAL")
+    field(THST, "SLOW")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SMF_CH$(CH)") {
+    field(DESC, "Set measuring filter CH(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSMF($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_SMF_CH$(CH)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "NONE")
+    field(ONST, "FAST")
+    field(TWST, "NORMAL")
+    field(THST, "SLOW")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+record(ai, "$(DEV):GET_SRL_CH$(CH)")
+{
+    field(DESC, "Get sensor lim. CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getRSC($(CH),$(DEV):SRL_LOW_CH$(CH),$(DEV):SRL_HIGH_CH$(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+}
+
+record(ai, "$(DEV):SRL_LOW_CH$(CH)") {
+    field(DESC, "Lower limit CH$(CH)")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+    field(EGU,  "")
+}
+
+record(ai, "$(DEV):SRL_HIGH_CH$(CH)") {
+    field(DESC, "Upper limit CH$(CH)")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+    field(EGU,  "")
+}
+
+## Make calculation becasue there are more than 16 values from which I can choose
+record(longin, "$(DEV):GET_STI_RAW_CH$(CH)") {
+    field(DESC, "Get Sens. Type on CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSTI($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(LOPR, "0")
+    field(HOPR, "21")
+}

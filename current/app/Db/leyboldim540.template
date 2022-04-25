@@ -7,19 +7,6 @@
 #  	ASYN PORT_NAME
 #
 #
-record(stringout, "$(DEV):SEND") {
-    field(DESC, "IM540, send string")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto SEND($(DEV),RCVE) $(PORT)")
-    field(SCAN, "Passive")
-}
-
-record(stringin, "$(DEV):RCVE") {
-    field(DESC, "IM540, send/receive")
-    field(DTYP, "Soft Channel")
-    field(SCAN, "Passive")
-}
-
 record(bo, "$(DEV):RESET_ERR") {
     field(DESC, "Reset errors command")
     field(DTYP, "stream")
@@ -38,342 +25,60 @@ record(bo, "$(DEV):RESET_DEVICE") {
     field(ONAM, "RESET")
 }
 
-record(mbbiDirect, "$(DEV):GDE")
+record(mbbiDirect, "$(DEV):GET_ERR_RS232")
+{
+    field(DESC, "Communication error")
+    field(SCAN, "Passive")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getERR $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):GET_GDE")
 {
     field(DESC, "Global device Error")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getGDE $(PORT)")
-    field(FLNK, "$(DEV):ERR:WDG")
+    field(SCAN, "$(CSCAN) second")
 }
 
-record(bi, "$(DEV):ERR:WDG")
-{
-    field(DESC, "Watchdog status")
-    field(INP,  "$(DEV):GDE.B0 CPP NMS")
-    field(FLNK, "$(DEV):ERR:ROM")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:ROM")
-{
-    field(DESC, "ROM Error")
-    field(INP,  "$(DEV):GDE.B1 CPP NMS")
-    field(FLNK, "$(DEV):ERR:RAM")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:RAM")
-{
-    field(DESC, "RAM Error")
-    field(INP,  "$(DEV):GDE.B2 CPP NMS")
-    field(FLNK, "$(DEV):ERR:CRC")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:CRC")
-{
-    field(DESC, "CRC test Error")
-    field(INP,  "$(DEV):GDE.B3 CPP NMS")
-    field(FLNK, "$(DEV):ERR:SPI")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:SPI")
-{
-    field(DESC, "SPI Error")
-    field(INP,  "$(DEV):GDE.B4 CPP NMS")
-    field(FLNK, "$(DEV):ERR:NEW_SENS")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:NEW_SENS")
-{
-    field(DESC, "New sensor has been detected")
-    field(INP,  "$(DEV):GDE.B5 CPP NMS")
-    field(FLNK, "$(DEV):ERR:EMI_OFF")	
-    field(ZNAM, "NO_NEW_SENSOR")
-    field(ONAM, "NEW_SENSOR")
-}
-
-record(bi, "$(DEV):ERR:EMI_OFF")
-{
-    field(DESC, "Emission off because Pressure too high")
-    field(INP,  "$(DEV):GDE.B6 CPP NMS")
-    field(FLNK, "$(DEV):ERR:EMI_OFF_KEY")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:EMI_OFF_KEY")
-{
-    field(DESC, "Emission shutdown via keyboard")
-    field(INP,  "$(DEV):GDE.B7 CPP NMS")
-    field(FLNK, "$(DEV):ERR:OVERTEMP")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:OVERTEMP")
-{
-    field(DESC, "Overtemperature of the power supply")
-    field(INP,  "$(DEV):GDE.B8 CPP NMS")
-    field(FLNK, "$(DEV):ERR:SENS_STATUS_CHGD")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:SENS_STATUS_CHGD")
-{
-    field(DESC, "Senor status of the CH1-4 has changed")
-    field(INP,  "$(DEV):GDE.B9 CPP NMS")
-    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH1")
-    field(ZNAM, "NO_CHANGE")
-    field(ONAM, "STATUS_CHNAGED")
-}
-
-record(bi, "$(DEV):ERR:SENS_STATUS_CH1")
-{
-    field(DESC, "Senor status on CH1 chnaged")
-    field(INP,  "$(DEV):GDE.BA CPP NMS")
-    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH2")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:SENS_STATUS_CH2")
-{
-    field(DESC, "Senor status on CH2 chnaged")
-    field(INP,  "$(DEV):GDE.BB CPP NMS")
-    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH3")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:SENS_STATUS_CH3")
-{
-    field(DESC, "Senor status on CH3 chnaged")
-    field(INP,  "$(DEV):GDE.BC CPP NMS")
-    field(FLNK, "$(DEV):ERR:SENS_STATUS_CH4")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:SENS_STATUS_CH4")
-{
-    field(DESC, "Senor status on CH4 chnaged")
-    field(INP,  "$(DEV):GDE.BD CPP NMS")
-    field(FLNK, "$(DEV):ERR:PS")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:PS")
-{
-    field(DESC, "PS caused err. or wrn")
-    field(INP,  "$(DEV):GDE.BE CPP NMS")
-    field(FLNK, "$(DEV):ERR:IONIVAC_PS")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ERR:IONIVAC_PS")
-{
-    field(DESC, "Ionivac PS has caused an err. or wrn.")
-    field(INP,  "$(DEV):GDE.BF CPP NMS")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(mbbiDirect, "$(DEV):ISE")
+record(mbbiDirect, "$(DEV):GET_ISE")
 {
     field(DESC, "Ioni Supply Errors")
-#    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getISE $(PORT)")
-    field(FLNK, "$(DEV):ISE_ERR:AV")
+    field(SCAN, "$(CSCAN) second")
 }
 
-record(bi, "$(DEV):ISE_ERR:AV")
-{
-    field(DESC, "Anode voltage error")
-    field(INP,  "$(DEV):ISE.B0 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:CV")
-{
-    field(DESC, "Cathode voltage error")
-    field(INP,  "$(DEV):ISE.B1 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:RV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:RV")
-{
-    field(DESC, "Reflector voltage error")
-    field(INP,  "$(DEV):ISE.B2 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:AC")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:AC")
-{
-    field(DESC, "Anode current error")
-    field(INP,  "$(DEV):ISE.B3 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:FV")
-{
-    field(DESC, "Filament voltage error")
-    field(INP,  "$(DEV):ISE.B4 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FC")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:FC")
-{
-    field(DESC, "Filament current error")
-    field(INP,  "$(DEV):ISE.B5 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FP")	
-    field(ZNAM, "NO_NEW_SENSOR")
-    field(ONAM, "NEW_SENSOR")
-}
-
-record(bi, "$(DEV):ISE_ERR:FP")
-{
-    field(DESC, "Filament power error")
-    field(INP,  "$(DEV):ISE.B6 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CRA")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:CRA")
-{
-    field(DESC, "Cathode regulator absolute error")
-    field(INP,  "$(DEV):ISE.B8 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CRD")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_ERR:CRD")
-{
-    field(DESC, "Cathode regulator deviation error")
-    field(INP,  "$(DEV):ISE.B9 CPP NMS")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(mbbiDirect, "$(DEV):ISW")
+record(mbbiDirect, "$(DEV):GET_ISW")
 {
     field(DESC, "Ioni Supply Warnings")
-#    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getISW $(PORT)")
-    field(FLNK, "$(DEV):ISE_WRN:AV")
+    field(SCAN, "$(CSCAN) second")
 }
 
-record(bi, "$(DEV):ISE_WRN:AV")
+record(mbbiDirect, "$(DEV):GET_VSE")
 {
-    field(DESC, "Anode voltage warning")
-    field(INP,  "$(DEV):ISW.B0 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
+    field(DESC, "Voltage Supply Errors")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getVSE $(PORT)")
+    field(SCAN, "$(CSCAN) second")
 }
 
-record(bi, "$(DEV):ISE_WRN:CV")
+record(mbbiDirect, "$(DEV):GET_VSW")
 {
-    field(DESC, "Cathode voltage warning")
-    field(INP,  "$(DEV):ISW.B1 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:RV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
+    field(DESC, "Voltage Supply Warnings")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getVSW $(PORT)")
+    field(SCAN, "$(CSCAN) second")
 }
 
-record(bi, "$(DEV):ISE_WRN:RV")
-{
-    field(DESC, "Reflector voltage warning")
-    field(INP,  "$(DEV):ISW.B2 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:AC")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_WRN:AC")
-{
-    field(DESC, "Anode current warning")
-    field(INP,  "$(DEV):ISW.B3 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FV")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_WRN:FV")
-{
-    field(DESC, "Filament voltage warning")
-    field(INP,  "$(DEV):ISW.B4 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FC")	
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_WRN:FC")
-{
-    field(DESC, "Filament current warning")
-    field(INP,  "$(DEV):ISW.B5 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:FP")	
-    field(ZNAM, "NO_NEW_SENSOR")
-    field(ONAM, "NEW_SENSOR")
-}
-
-record(bi, "$(DEV):ISE_WRN:FP")
-{
-    field(DESC, "Filament power warning")
-    field(INP,  "$(DEV):ISW.B6 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CRA")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_WRN:CRA")
-{
-    field(DESC, "Cathode regulator absolute warning")
-    field(INP,  "$(DEV):ISW.B8 CPP NMS")
-    field(FLNK, "$(DEV):ISE_ERR:CRD")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bi, "$(DEV):ISE_WRN:CRD")
-{
-    field(DESC, "Cathode regulator deviation warning")
-    field(INP,  "$(DEV):ISW.B9 CPP NMS")
-    field(ZNAM, "OK")
-    field(ONAM, "ERROR")
-}
-
-record(bo, "$(DEV):PRX")
+record(bo, "$(DEV):GET_PRX")
 {
     field(DESC, "Get status and P from all 4 CH")
-    field(SCAN, "$(DSCAN) second")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto getPRX($(DEV):STAT_CH1,$(DEV):PRESS_CH1,$(DEV):STAT_CH2,$(DEV):PRESS_CH2,$(DEV):STAT_CH3,$(DEV):PRESS_CH3,$(DEV):STAT_CH4,$(DEV):PRESS_CH4) $(PORT)")
+    field(SCAN, "$(DSCAN) second")
 }
 
 record(mbbiDirect, "$(DEV):STAT_CH1")
@@ -427,3 +132,271 @@ record(ai, "$(DEV):PRESS_CH4") {
     field(EGU,  "")
     field(PREC, "4")
 }
+
+record(bi, "$(DEV):GET_FCO") {
+    field(DESC, "Auto Sens. selection if error")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getFCO $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_RMO") {
+    field(DESC, "Get mode of recorder output")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getRMO $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "IM540")
+    field(ONST, "IM520_AUTO")
+    field(TWST, "IM520_FIX")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_RMO") {
+    field(DESC, "Set mode of recorder output")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setRMO $(PORT)")
+    field(FLNK, "$(DEV):GET_RMO")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "IM540")
+    field(ONST, "IM520_AUTO")
+    field(TWST, "IM520_FIX")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+## Reactivate the sensor control after changing the SCS, SCM, SCC, SCL, SCT parameters.
+record(bo, "$(DEV):SET_SCA")
+{
+    field(DESC, "Reactivate sens. control")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCA $(PORT)")
+}
+
+record(mbbi, "$(DEV):GET_SCS") {
+    field(DESC, "Get sensor control setting")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSCS $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "CH_CNTRL")
+    field(ONST, "TTR_CNTRL_IONIVAC")
+    field(TWST, "VIA_ANLG_INP")
+    field(THST, "VIA_DIG_INP")
+    field(FRST, "VIA_ANLG_DIG_INP")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SCS") {
+    field(DESC, "Set sensor control setting")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCS $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "CH_CNTRL")
+    field(ONST, "TTR_CNTRL_IONIVAC")
+    field(TWST, "VIA_ANLG_INP")
+    field(THST, "VIA_DIG_INP")
+    field(FRST, "VIA_ANLG_DIG_INP")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_SCT") {
+    field(DESC, "Get TTR sens. control")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSCT $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "CH CNTRL")
+    field(ONST, "TTR CNTRL IONIVAC")
+    field(TWST, "VIA ANLG INP")
+    field(THST, "VIA DIG INP")
+    field(FRST, "VIA ANLG_DIG INP")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SCT") {
+    field(DESC, "Set TTR sens. control")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCT $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "TTR_CNTRL_OFF")
+    field(ONST, "TTR_CNTRL_CH3_ON")
+    field(TWST, "TTR_CNTRL_CH4_ON")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_UNI") {
+    field(DESC, "Get pressure unit")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getUNI $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "mbar")
+    field(ONST, "Torr")
+    field(TWST, "Pa")
+    field(THST, "Micron")
+}
+
+record(mbbo, "$(DEV):SET_UNI") {
+    field(DESC, "Set pressure unit")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setUNI $(PORT)")
+    field(FLNK, "$(DEV):GET_UNI")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "mbar")
+    field(ONST, "Torr")
+    field(TWST, "Pa")
+    field(THST, "Micron")
+}
+
+record(mbbi, "$(DEV):GET_IEC") {
+    field(DESC, "Get emi. current")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getIEC $(PORT)")
+    field(SCAN, "$(DSCAN) second")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(ZRST, "0.0 mA")
+    field(ONST, "0.1 mA")
+    field(TWST, "1 mA")
+    field(THST, "1.6 mA")
+    field(FRST, "10 mA")
+    field(FVST, "45 mA")
+    field(SXST, "90 mA")
+}
+
+record(ai, "$(DEV):GET_GAV") {
+    field(DESC, "Get gauge anode voltage")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGAV $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GCV") {
+    field(DESC, "Get gauge cathode voltage")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGCV $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GEC") {
+    field(DESC, "Get gauge emission current")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGEC $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "mA")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFC") {
+    field(DESC, "Get filament current")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGFC $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "A")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFP") {
+    field(DESC, "Get filament power")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGFP $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "W")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFU") {
+    field(DESC, "Get filament voltage")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGFU $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GRV") {
+    field(DESC, "Get filament reflector voltage")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGRV $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(longin, "$(DEV):GET_IDO") {
+    field(DESC, "Get IM540 operation time")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getIDO $(PORT)")
+    field(SCAN, "10 second")
+    field(EGU,  "h")
+}
+
