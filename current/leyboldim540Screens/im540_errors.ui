@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>im540Errors</class>
+ <widget class="QWidget" name="im540Errors">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>861</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>{DEV} Device Errors</string>
+  </property>
+  <widget class="PyDMFrame" name="PyDMFrame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>201</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Global Device Error</string>
+    </property>
+   </widget>
+   <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>181</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string>ca://${DEV}:GET_GDE</string>
+    </property>
+    <property name="onColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="labelPosition" stdset="0">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="numBits" stdset="0">
+     <number>16</number>
+    </property>
+    <property name="labels" stdset="0">
+     <stringlist>
+      <string>WDG Responded</string>
+      <string>ROM Error</string>
+      <string>RAM Error</string>
+      <string>EEPROM CRC Test Error</string>
+      <string>SPI Error</string>
+      <string>New Sens. Detected</string>
+      <string>EMI Off, P&gt;Pmax</string>
+      <string>EMI Off via Keyoard</string>
+      <string>Overtemp PS</string>
+      <string>Sens. Stat. changed</string>
+      <string>Sens. Stat. CH1</string>
+      <string>Sens. Stat. CH2</string>
+      <string>Sens. Stat. CH3</string>
+      <string>Sens. Stat. CH4</string>
+      <string>PS error </string>
+      <string>Ionivac PS error</string>
+     </stringlist>
+    </property>
+   </widget>
+  </widget>
+  <widget class="PyDMFrame" name="PyDMFrame_2">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>10</y>
+     <width>171</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ioni Supply Errors</string>
+    </property>
+   </widget>
+   <widget class="PyDMByteIndicator" name="PyDMByteIndicator_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>151</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string>ca://${DEV}:GET_ISE</string>
+    </property>
+    <property name="onColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="labelPosition" stdset="0">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="numBits" stdset="0">
+     <number>16</number>
+    </property>
+    <property name="labels" stdset="0">
+     <stringlist>
+      <string>Anode Voltage</string>
+      <string>Cathode Voltage</string>
+      <string>Reflector Voltage</string>
+      <string>Anode Current</string>
+      <string>Filament Voltage</string>
+      <string>Filament Current</string>
+      <string>Filament Power</string>
+      <string>N/A</string>
+      <string>Cathode reg. Abs</string>
+      <string>Cathode reg. Dev.</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+     </stringlist>
+    </property>
+   </widget>
+  </widget>
+  <widget class="PyDMFrame" name="PyDMFrame_3">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>10</y>
+     <width>171</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ioni Supply Warnings</string>
+    </property>
+   </widget>
+   <widget class="PyDMByteIndicator" name="PyDMByteIndicator_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>151</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string>ca://${DEV}:GET_ISW</string>
+    </property>
+    <property name="onColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="labelPosition" stdset="0">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="numBits" stdset="0">
+     <number>16</number>
+    </property>
+    <property name="labels" stdset="0">
+     <stringlist>
+      <string>Anode Voltage</string>
+      <string>Cathode Voltage</string>
+      <string>Reflector Voltage</string>
+      <string>Anode Current</string>
+      <string>Filament Voltage</string>
+      <string>Filament Current</string>
+      <string>Filament Power</string>
+      <string>N/A</string>
+      <string>Cathode reg. Abs</string>
+      <string>Cathode reg. Dev.</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+     </stringlist>
+    </property>
+   </widget>
+  </widget>
+  <widget class="PyDMFrame" name="PyDMFrame_4">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>10</y>
+     <width>151</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Power supply Errors</string>
+    </property>
+   </widget>
+   <widget class="PyDMByteIndicator" name="PyDMByteIndicator_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>131</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string>ca://${DEV}:GET_VSE</string>
+    </property>
+    <property name="onColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="labelPosition" stdset="0">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="numBits" stdset="0">
+     <number>16</number>
+    </property>
+    <property name="labels" stdset="0">
+     <stringlist>
+      <string>+5 V Analog</string>
+      <string>-15 V</string>
+      <string>+24 V</string>
+      <string>+ 15 V</string>
+      <string>+5 V</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>+24 V CH3</string>
+      <string>+24 V CH4</string>
+      <string>+24 V KL</string>
+      <string>+5 V RS232</string>
+      <string>+15 V VB-Print</string>
+      <string>-15 V VB-Print</string>
+      <string>N/A</string>
+      <string>N/A</string>
+     </stringlist>
+    </property>
+   </widget>
+  </widget>
+  <widget class="PyDMFrame" name="PyDMFrame_5">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>10</y>
+     <width>171</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Power supply Warnings</string>
+    </property>
+   </widget>
+   <widget class="PyDMByteIndicator" name="PyDMByteIndicator_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>131</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="channel" stdset="0">
+     <string>ca://${DEV}:GET_VSW</string>
+    </property>
+    <property name="onColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="labelPosition" stdset="0">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="numBits" stdset="0">
+     <number>16</number>
+    </property>
+    <property name="labels" stdset="0">
+     <stringlist>
+      <string>+5 V Analog</string>
+      <string>-15 V</string>
+      <string>+24 V</string>
+      <string>+ 15 V</string>
+      <string>+5 V</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>N/A</string>
+      <string>+24 V CH3</string>
+      <string>+24 V CH4</string>
+      <string>+24 V KL</string>
+      <string>+5 V RS232</string>
+      <string>+15 V VB-Print</string>
+      <string>-15 V VB-Print</string>
+      <string>N/A</string>
+      <string>N/A</string>
+     </stringlist>
+    </property>
+   </widget>
+  </widget>
+  <widget class="PyDMPushButton" name="PyDMPushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>RESET ERRROR</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string>ca://${DEV}:RESET_ERR</string>
+   </property>
+   <property name="pressValue" stdset="0">
+    <string>1</string>
+   </property>
+  </widget>
+  <widget class="PyDMPushButton" name="PyDMPushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>300</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="text">
+    <string>SW RESET</string>
+   </property>
+   <property name="channel" stdset="0">
+    <string>ca://${DEV}:RESET_DEVICE</string>
+   </property>
+   <property name="showConfirmDialog" stdset="0">
+    <bool>true</bool>
+   </property>
+   <property name="pressValue" stdset="0">
+    <string>1</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PyDMByteIndicator</class>
+   <extends>QWidget</extends>
+   <header>pydm.widgets.byte</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMFrame</class>
+   <extends>QFrame</extends>
+   <header>pydm.widgets.frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyDMPushButton</class>
+   <extends>QPushButton</extends>
+   <header>pydm.widgets.pushbutton</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -11,10 +11,8 @@
 #
 record(bi, "$(DEV):GET_EMI_CH$(CH)") {
     field(DESC, "Emision status for CH$(CH)")
-    field(PINI, "YES")
-    field(DTYP, "stream")
-    field(INP,  "@IM540.proto getEMI($(CH)) $(PORT)")
-    field(SCAN, "$(CSCAN) second")
+    field(INP,  "$(DEV):STAT_CH$(CH).B5 CPP NMS")
+    field(SCAN, "$(DSCAN) second")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(ZSV,  "NO_ALARM")
@@ -75,32 +73,29 @@ record(ai, "$(DEV):GET_RSL_OUT$(CH)")
     field(PINI, "YES")
     field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSC($(CH),$(DEV):RSL_LOW_OUT$(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
+    field(INP,  "@IM540.proto getRSL($(CH),$(DEV):RSL_LOW_OUT$(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
 }
 
 record(ai, "$(DEV):RSL_LOW_OUT$(CH)") {
     field(DESC, "Low P limit of rec. scale CH$(CH)")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
-    field(EGU,  "")
 }
 
 record(ai, "$(DEV):RSL_HIGH_OUT$(CH)") {
     field(DESC, "Upper P limit of rec. scale CH$(CH)")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
-    field(EGU,  "")
 }
 
 ## This command allowed only in IM540 MODE and if scalling is NOT set to SCALE_USER
 record(ao, "$(DEV):SET_RSL_LOW_OUT$(CH)") {
-    field(DESC, "Set lower P of rec. scale CH$(CH)")
+    field(DESC, "Set lower P lim of rec. scale CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSL_LOW($(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
     field(FLNK, "$(DEV):GET_RSL_OUT$(CH)")
 #    field(DRVH, "")
 #    field(DRVL, "")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
@@ -111,11 +106,10 @@ record(ao, "$(DEV):SET_RSL_HIGH_OUT$(CH)") {
     field(FLNK, "$(DEV):GET_RSL_OUT$(CH)")
 #    field(DRVH, "")
 #    field(DRVL, "")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
-record(bi, "$(DEV):GET_RSM_CH$(CH)") {
+record(bi, "$(DEV):GET_RSM_OUT$(CH)") {
     field(DESC, "Get rec. scale mode CH$(CH)")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -128,18 +122,18 @@ record(bi, "$(DEV):GET_RSM_CH$(CH)") {
 }
 
 ## This command allowed only in IM540 MODE
-record(bo, "$(DEV):SET_RSM_CH$(CH)") {
+record(bo, "$(DEV):SET_RSM_OUT$(CH)") {
     field(DESC, "Set rec. scale mode CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSM($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):GET_RSM_CH$(CH)")
-    field(ZNAM, "OFF")
-    field(ONAM, "ON")
+    field(FLNK, "$(DEV):GET_RSM_OUT$(CH)")
+    field(ZNAM, "LIN_SCALE")
+    field(ONAM, "LOG_SCALE")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_RSO_CH$(CH)") {
+record(mbbi, "$(DEV):GET_RSO_OUT$(CH)") {
     field(DESC, "Get CH assign to rec. out (CH)")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -166,11 +160,11 @@ record(mbbi, "$(DEV):GET_RSO_CH$(CH)") {
 }
 
 ## This command allowed only in IM540 MODE
-record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
+record(mbbo, "$(DEV):SET_RSO_OUT$(CH)") {
     field(DESC, "Set CH assign to rec. out (CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSO($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):GET_RSO_CH$(CH)")
+    field(FLNK, "$(DEV):GET_RSO_OUT$(CH)")
     field(ZRVL, "1")
     field(ONVL, "2")
     field(TWVL, "3")
@@ -189,6 +183,27 @@ record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
     field(THSV, "NO_ALARM")
     field(FRSV, "NO_ALARM")
     field(FVSV, "NO_ALARM")
+}
+
+record(ai, "$(DEV):GET_SAC_$(CH)") {
+    field(DESC, "Get sens. amplification corr. CH$(CH)")
+    field(PINI, "YES")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getSAC($(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(EGU,  "")
+    field(PREC, "2")
+}
+
+record(ao, "$(DEV):SET_SAC_$(CH)") {
+    field(DESC, "Set sens. amplification corr. CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSAC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):SET_SAC_$(CH)")
+    field(DRVH, "9.99")
+    field(DRVL, "0.10")
+    field(EGU,  "")
+    field(PREC, "2")
 }
 
 record(mbbi, "$(DEV):GET_SAS_CH$(CH)") {
@@ -257,13 +272,29 @@ record(ai, "$(DEV):GET_SSV_CH$(CH)")
     field(EGU,  "")
 }
 
-record(ao, "$(DEV):SET_SSV_CH$(CH)") {
+## 01 BAG sensor, 02 EXT sensor
+record(calcout, "$(DEV):SSV_LOW_CALC_CH$(CH)")
+{
+    field(SCAN, "$(DSCAN) second")
+    field(CALC, "A=1?5:A=2?1:5")
+    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+    field(OUT, "$(DEV):SET_SSV_CH$(CH).DRVL")
+}
+
+record(calcout, "$(DEV):SSV_HIGH_CALC_CH$(CH)")
+{
+    field(SCAN, "$(DSCAN) second")
+    field(CALC, "A=1?30:A=2?20:20")
+    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+    field(OUT, "$(DEV):SET_SSV_CH$(CH).DRVH")
+}
+
+record(ao, "$(DEV):SET_SSV_CH$(CH)")
+{
     field(DESC, "Set sensitivity CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSSV($(CH)) $(PORT)")
     field(FLNK, "$(DEV):GET_SSV_CH$(CH)")
-#    field(DRVH, "15.0")
-#    field(DRVL, "1.0")
     field(EGU,  "")
     field(PREC, "2")
 }
@@ -275,8 +306,7 @@ record(ai, "$(DEV):GET_SXR_CH$(CH)")
     field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getSXR($(CH)) $(PORT)")
-    field(PREC, "4")
-    field(EGU,  "")
+    field(PREC, "2")
 }
 
 record(ao, "$(DEV):SET_SXR_CH$(CH)") {
@@ -286,8 +316,7 @@ record(ao, "$(DEV):SET_SXR_CH$(CH)") {
     field(FLNK, "$(DEV):GET_SXR_CH$(CH)")
 #    field(DRVH, "")
     field(DRVL, "0")
-#    field(EGU,  "")
-    field(PREC, "4")
+    field(PREC, "2")
 }
 
 record(ai, "$(DEV):GET_ISO_CH$(CH)")
@@ -298,7 +327,7 @@ record(ai, "$(DEV):GET_ISO_CH$(CH)")
     field(INP,  "@IM540.proto getISO($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
     field(PREC, "0")
-#    field(EGU,  "")
+    field(EGU,  "")
 }
 
 record(ai, "$(DEV):GET_IST_CH$(CH)")
@@ -324,3 +353,45 @@ record(ai, "$(DEV):IST_EXT_CH$(CH)") {
     field(EGU,  "h")
 }
 
+record(fanout, "$(DEV):UNI_FANOUT_OUT$(CH)")
+{
+    field(DESC, "Fanout pressure units")
+    field(SCAN, "$(DSCAN) second")
+    field(SELM, "All")
+    field(LNK0, "$(DEV):UNI_RSL_LOW_OUT$(CH)")
+    field(LNK1, "$(DEV):UNI_RSL_HIGH_OUT$(CH)")
+    field(LNK2, "$(DEV):UNI_RSL_SET_LOW_OUT$(CH)")
+    field(LNK3, "$(DEV):UNI_RSL_SET_HIGH_OUT$(CH)")
+}
+
+record(stringout, "$(DEV):UNI_RSL_LOW_OUT$(CH)")
+{
+    field(DESC, "Set P units RSL")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):RSL_LOW_OUT$(CH).EGU")
+}
+
+record(stringout, "$(DEV):UNI_RSL_HIGH_OUT$(CH)")
+{
+    field(DESC, "Set P units RSL")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):RSL_HIGH_OUT$(CH).EGU")
+}
+
+record(stringout, "$(DEV):UNI_RSL_SET_LOW_OUT$(CH)")
+{
+    field(DESC, "Set P units RSL")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):SET_RSL_LOW_OUT$(CH).EGU")
+}
+
+record(stringout, "$(DEV):UNI_RSL_SET_HIGH_OUT$(CH)")
+{
+    field(DESC, "Set P units RSL")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):SET_RSL_HIGH_OUT$(CH).EGU")
+}

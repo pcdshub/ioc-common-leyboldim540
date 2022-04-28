@@ -7,19 +7,19 @@
 #  	ASYN PORT_NAME
 #
 #
-record(bo, "$(DEV):RESET_ERR") {
-    field(DESC, "Reset errors command")
+record(bo, "$(DEV):RESET_ERR")
+{
+    field(DESC, "Reset error condition")
     field(DTYP, "stream")
-    field(HIGH, "1")
     field(OUT, "@IM540.proto resetError $(PORT)")
-    field(ZNAM, "RESET_RS232")
-    field(ONAM, "RESET_RS232")
+    field(ZNAM, "RESET")
+    field(ONAM, "RESET")
 }
 
-record(bo, "$(DEV):RESET_DEVICE") {
-    field(DESC, "Reset device command")
+record(bo, "$(DEV):RESET_DEVICE")
+{
+    field(DESC, "Trigg. SW reset")
     field(DTYP, "stream")
-    field(HIGH, "1")
     field(OUT, "@IM540.proto resetDevice $(PORT)")
     field(ZNAM, "RESET")
     field(ONAM, "RESET")
@@ -39,6 +39,25 @@ record(mbbiDirect, "$(DEV):GET_GDE")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getGDE $(PORT)")
     field(SCAN, "$(CSCAN) second")
+	field(FLNK, "$(DEV):STATUSCALC")
+}
+
+record(calc, "$(DEV):STATUSCALC")
+{
+    field(CALC, "A>B?1:0")
+    field(INPA, "$(DEV):GET_GDE.VAL PP")
+	field(INPB, "0")
+    field(FLNK, "$(DEV):DEV_STATUS")
+}
+
+record(bi, "$(DEV):DEV_STATUS")
+{
+    field(DESC, "GDE status")
+    field(INP,  "$(DEV):STATUSCALC")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
 }
 
 record(mbbiDirect, "$(DEV):GET_ISE")
@@ -87,10 +106,10 @@ record(mbbiDirect, "$(DEV):STAT_CH1")
     field(DTYP, "Raw Soft Channel")
 }
 
-record(ai, "$(DEV):PRESS_CH1") {
+record(ai, "$(DEV):PRESS_CH1")
+{
     field(DESC, "Measuring value on CH1")
     field(DTYP, "Soft Channel")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
@@ -100,10 +119,10 @@ record(mbbiDirect, "$(DEV):STAT_CH2")
     field(DTYP, "Raw Soft Channel")
 }
 
-record(ai, "$(DEV):PRESS_CH2") {
+record(ai, "$(DEV):PRESS_CH2")
+{
     field(DESC, "Measuring value on CH2")
     field(DTYP, "Soft Channel")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
@@ -113,10 +132,10 @@ record(mbbiDirect, "$(DEV):STAT_CH3")
     field(DTYP, "Raw Soft Channel")
 }
 
-record(ai, "$(DEV):PRESS_CH3") {
+record(ai, "$(DEV):PRESS_CH3")
+{
     field(DESC, "Measuring value on CH3")
     field(DTYP, "Soft Channel")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
@@ -126,14 +145,15 @@ record(mbbiDirect, "$(DEV):STAT_CH4")
     field(DTYP, "Raw Soft Channel")
 }
 
-record(ai, "$(DEV):PRESS_CH4") {
+record(ai, "$(DEV):PRESS_CH4")
+{
     field(DESC, "Measuring value on CH4")
     field(DTYP, "Soft Channel")
-    field(EGU,  "")
     field(PREC, "4")
 }
 
-record(bi, "$(DEV):GET_FCO") {
+record(bi, "$(DEV):GET_FCO")
+{
     field(DESC, "Auto Sens. selection if error")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -145,7 +165,8 @@ record(bi, "$(DEV):GET_FCO") {
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_RMO") {
+record(mbbi, "$(DEV):GET_RMO")
+{
     field(DESC, "Get mode of recorder output")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -162,7 +183,8 @@ record(mbbi, "$(DEV):GET_RMO") {
     field(TWSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_RMO") {
+record(mbbo, "$(DEV):SET_RMO")
+{
     field(DESC, "Set mode of recorder output")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRMO $(PORT)")
@@ -186,7 +208,8 @@ record(bo, "$(DEV):SET_SCA")
     field(OUT,  "@IM540.proto setSCA $(PORT)")
 }
 
-record(mbbi, "$(DEV):GET_SCS") {
+record(mbbi, "$(DEV):GET_SCS")
+{
     field(DESC, "Get sensor control setting")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -209,7 +232,8 @@ record(mbbi, "$(DEV):GET_SCS") {
     field(FRSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SCS") {
+record(mbbo, "$(DEV):SET_SCS")
+{
     field(DESC, "Set sensor control setting")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCS $(PORT)")
@@ -231,7 +255,8 @@ record(mbbo, "$(DEV):SET_SCS") {
     field(FRSV, "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SCT") {
+record(mbbi, "$(DEV):GET_SCT")
+{
     field(DESC, "Get TTR sens. control")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -240,19 +265,16 @@ record(mbbi, "$(DEV):GET_SCT") {
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
-    field(ZRST, "CH CNTRL")
-    field(ONST, "TTR CNTRL IONIVAC")
-    field(TWST, "VIA ANLG INP")
-    field(THST, "VIA DIG INP")
-    field(FRST, "VIA ANLG_DIG INP")
+    field(ZRST, "TTR_CNTRL_OFF")
+    field(ONST, "TTR_CNTRL_CH3_ON")
+    field(TWST, "TTR_CNTRL_CH4_ON")
     field(ZRSV, "NO_ALARM")
     field(ONSV, "NO_ALARM")
     field(TWSV, "NO_ALARM")
-    field(THSV, "NO_ALARM")
-    field(FRSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SCT") {
+record(mbbo, "$(DEV):SET_SCT")
+{
     field(DESC, "Set TTR sens. control")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCT $(PORT)")
@@ -268,7 +290,8 @@ record(mbbo, "$(DEV):SET_SCT") {
     field(TWSV, "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_UNI") {
+record(mbbi, "$(DEV):GET_UNI")
+{
     field(DESC, "Get pressure unit")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -284,7 +307,8 @@ record(mbbi, "$(DEV):GET_UNI") {
     field(THST, "Micron")
 }
 
-record(mbbo, "$(DEV):SET_UNI") {
+record(mbbo, "$(DEV):SET_UNI")
+{
     field(DESC, "Set pressure unit")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setUNI $(PORT)")
@@ -299,7 +323,8 @@ record(mbbo, "$(DEV):SET_UNI") {
     field(THST, "Micron")
 }
 
-record(mbbi, "$(DEV):GET_IEC") {
+record(mbbi, "$(DEV):GET_IEC")
+{
     field(DESC, "Get emi. current")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -321,7 +346,8 @@ record(mbbi, "$(DEV):GET_IEC") {
     field(SXST, "90 mA")
 }
 
-record(ai, "$(DEV):GET_GAV") {
+record(ai, "$(DEV):GET_GAV")
+{
     field(DESC, "Get gauge anode voltage")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -331,7 +357,8 @@ record(ai, "$(DEV):GET_GAV") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GCV") {
+record(ai, "$(DEV):GET_GCV")
+{
     field(DESC, "Get gauge cathode voltage")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -341,7 +368,8 @@ record(ai, "$(DEV):GET_GCV") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GEC") {
+record(ai, "$(DEV):GET_GEC")
+{
     field(DESC, "Get gauge emission current")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -351,7 +379,8 @@ record(ai, "$(DEV):GET_GEC") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GFC") {
+record(ai, "$(DEV):GET_GFC")
+{
     field(DESC, "Get filament current")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -361,7 +390,8 @@ record(ai, "$(DEV):GET_GFC") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GFP") {
+record(ai, "$(DEV):GET_GFP")
+{
     field(DESC, "Get filament power")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -371,7 +401,8 @@ record(ai, "$(DEV):GET_GFP") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GFU") {
+record(ai, "$(DEV):GET_GFU")
+{
     field(DESC, "Get filament voltage")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -381,7 +412,8 @@ record(ai, "$(DEV):GET_GFU") {
     field(PREC, "3")
 }
 
-record(ai, "$(DEV):GET_GRV") {
+record(ai, "$(DEV):GET_GRV")
+{
     field(DESC, "Get filament reflector voltage")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -391,7 +423,8 @@ record(ai, "$(DEV):GET_GRV") {
     field(PREC, "3")
 }
 
-record(longin, "$(DEV):GET_IDO") {
+record(longin, "$(DEV):GET_IDO")
+{
     field(DESC, "Get IM540 operation time")
     field(PINI, "YES")
     field(DTYP, "stream")
@@ -400,3 +433,45 @@ record(longin, "$(DEV):GET_IDO") {
     field(EGU,  "h")
 }
 
+record(fanout, "$(DEV):UNI_FANOUT")
+{
+    field(DESC, "Fanout pressure units")
+    field(SCAN, "$(DSCAN) second")
+    field(SELM, "All")
+    field(LNK0, "$(DEV):SET_P_UNITS_CH1")
+    field(LNK1, "$(DEV):SET_P_UNITS_CH2")
+    field(LNK2, "$(DEV):SET_P_UNITS_CH3")
+    field(LNK3, "$(DEV):SET_P_UNITS_CH4")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH1")
+{
+    field(DESC, "Set P units CH1")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH1.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH2")
+{
+    field(DESC, "Set P units CH2")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH2.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH3")
+{
+    field(DESC, "Set P units CH3")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH3.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH4")
+{
+    field(DESC, "Set P units CH4")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH4.EGU")
+}

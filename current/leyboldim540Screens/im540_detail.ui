@@ -6,38 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>406</width>
-    <height>299</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
+  <widget class="PyDMLabel" name="PyDMLabel">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>40</y>
+     <x>50</x>
+     <y>20</y>
      <width>101</width>
-     <height>231</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="toolTip">
     <string/>
    </property>
    <property name="channel" stdset="0">
-    <string>ca://${DEV}:GET_GDE</string>
-   </property>
-   <property name="numBits" stdset="0">
-    <number>16</number>
+    <string>ca://${DEV}:GET_RSO_OUT${N}</string>
    </property>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PyDMByteIndicator</class>
-   <extends>QWidget</extends>
-   <header>pydm.widgets.byte</header>
+   <class>PyDMLabel</class>
+   <extends>QLabel</extends>
+   <header>pydm.widgets.label</header>
   </customwidget>
  </customwidgets>
  <resources/>
