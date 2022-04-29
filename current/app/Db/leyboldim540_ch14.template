@@ -11,16 +11,15 @@
 #
 record(mbbi, "$(DEV):GET_OFC_CH$(CH)") {
     field(DESC, "Offset correction of CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
     field(ZRST, "IGNORE")
-    field(ONST, "APPLY")
-    field(TWST, "OFFSET RUNNING")
+    field(ONST, "APPLIED")
+    field(TWST, "OFF.RUNNING")
     field(ZRSV, "NO_ALARM")
     field(ONSV, "NO_ALARM")
     field(TWSV, "NO_ALARM")
@@ -39,10 +38,9 @@ record(bo, "$(DEV):SET_OFC_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_BCC_CH$(CH)") {
     field(DESC, "Get const. emi current CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -79,10 +77,9 @@ record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
 
 record(bi, "$(DEV):GET_CAO_CH$(CH)") {
     field(DESC, "Get Offset auto correction CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
 	field(ZSV,  "NO_ALARM")
@@ -103,10 +100,9 @@ record(bo, "$(DEV):SET_CAO_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_SCC_CH$(CH)") {
     field(DESC, "Get CH that controls a sensor on CH(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -146,13 +142,12 @@ record(mbbo, "$(DEV):SET_SCC_CH$(CH)") {
     field(FRSV, "NO_ALARM")
 }
 
-record(ai, "$(DEV):GET_SCL_CH$(CH)")
+record(bo, "$(DEV):GET_SCL_CH$(CH)")
 {
     field(DESC, "Get sensor cntrl. lim. CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSC($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(OUT,  "@IM540.proto getSCL($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
 }
 
 record(ai, "$(DEV):SCL_LOW_CH$(CH)")
@@ -193,10 +188,9 @@ record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_SCM_CH$(CH)") {
     field(DESC, "Get sens. control mode CH(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSCM($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSCM($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -232,10 +226,9 @@ record(mbbo, "$(DEV):SET_SCM_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_SGC_CH$(CH)") {
     field(DESC, "Get sens. gas correction CH(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSCM($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSGC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -268,7 +261,7 @@ record(mbbi, "$(DEV):GET_SGC_CH$(CH)") {
 record(mbbo, "$(DEV):SET_SGC_CH$(CH)") {
     field(DESC, "Set sens. gas correction CH(CH)")
     field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setSCM($(CH)) $(PORT)")
+    field(OUT,  "@IM540.proto setSGC($(CH)) $(PORT)")
     field(FLNK, "$(DEV):GET_SGC_CH$(CH)")
     field(ZRVL, "0")
     field(ONVL, "1")
@@ -301,10 +294,9 @@ record(mbbo, "$(DEV):SET_SGC_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_SMF_CH$(CH)") {
     field(DESC, "Get measuring filter CH(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSMF($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSMF($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -338,33 +330,33 @@ record(mbbo, "$(DEV):SET_SMF_CH$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(ai, "$(DEV):GET_SRL_CH$(CH)")
+record(bo, "$(DEV):GET_SRL_CH$(CH)")
 {
     field(DESC, "Get sensor lim. CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSRL($(CH),$(DEV):SRL_LOW_CH$(CH),$(DEV):SRL_HIGH_CH$(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(OUT,  "@IM540.proto getSRL($(CH),$(DEV):SRL_LOW_CH$(CH),$(DEV):SRL_HIGH_CH$(CH)) $(PORT)")
 }
 
-record(ai, "$(DEV):SRL_LOW_CH$(CH)") {
+record(ao, "$(DEV):SRL_LOW_CH$(CH)") {
     field(DESC, "SRL Lower limit CH$(CH)")
     field(DTYP, "Soft Channel")
+#    field(OUT,  "$(DEV):PRESS_CH$(CH).LOPR")
     field(PREC, "4")
 }
 
-record(ai, "$(DEV):SRL_HIGH_CH$(CH)") {
+record(ao, "$(DEV):SRL_HIGH_CH$(CH)") {
     field(DESC, "SRL Upper limit CH$(CH)")
     field(DTYP, "Soft Channel")
+#    field(OUT,  "$(DEV):PRESS_CH$(CH).HOPR")
     field(PREC, "4")
 }
 
 record(longin, "$(DEV):GET_STI_RAW_CH$(CH)") {
     field(DESC, "Get Sens. Type on CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSTI($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSTI($(CH)) $(PORT)")
     field(LOPR, "0")
     field(HOPR, "21")
 }

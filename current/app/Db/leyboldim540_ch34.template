@@ -9,13 +9,12 @@
 #   CHANNEL NUMBER
 #
 #
-##Make calculation so I will be able to select betwen 18 values (mbbi support only up to 16 values)
+## Make calculation so I will be able to select betwen 18 values (mbbi support only up to 16 values)
 record(longin, "$(DEV):GET_CST_RAW_CH$(CH)") {
     field(DESC, "Get Sens. Type on CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getCST($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getCST($(CH)) $(PORT)")
     field(LOPR, "0")
     field(HOPR, "17")
 }
@@ -32,21 +31,19 @@ record(longout, "$(DEV):SET_CST_RAW_CH$(CH)") {
 record(ai, "$(DEV):GET_ISO_CH$(CH)")
 {
     field(DESC, "Get curr. offset CH$(CH)")
-    field(PINI, "YES")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getISO($(CH)) $(PORT)")
     field(PREC, "3")
     field(EGU,  "V")
 }
 
-record(ai, "$(DEV):GET_IST_CH$(CH)")
+record(bo, "$(DEV):GET_IST_CH$(CH)")
 {
-    field(DESC, "Op. time of BAG and EXT syst.")
-    field(PINI, "YES")
+    field(DESC, "Op. time of TTR and CTR syst.")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getIST($(CH),$(DEV):IST_TTR_CH$(CH),$(DEV):IST_CTR_CH$(CH)) $(PORT)")
     field(SCAN, "10 second")
+    field(OUT,  "@IM540.proto getIST($(CH),$(DEV):IST_TTR_CH$(CH),$(DEV):IST_CTR_CH$(CH)) $(PORT)")
 }
 
 record(ai, "$(DEV):IST_TTR_CH$(CH)") {

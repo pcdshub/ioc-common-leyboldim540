@@ -66,6 +66,13 @@
       <blue>0</blue>
      </color>
     </property>
+    <property name="offColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+     </color>
+    </property>
     <property name="labelPosition" stdset="0">
      <enum>QTabWidget::West</enum>
     </property>
@@ -145,6 +152,13 @@
       <red>255</red>
       <green>0</green>
       <blue>0</blue>
+     </color>
+    </property>
+    <property name="offColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
      </color>
     </property>
     <property name="labelPosition" stdset="0">
@@ -228,6 +242,13 @@
       <blue>0</blue>
      </color>
     </property>
+    <property name="offColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+     </color>
+    </property>
     <property name="labelPosition" stdset="0">
      <enum>QTabWidget::West</enum>
     </property>
@@ -309,6 +330,13 @@
       <blue>0</blue>
      </color>
     </property>
+    <property name="offColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+     </color>
+    </property>
     <property name="labelPosition" stdset="0">
      <enum>QTabWidget::West</enum>
     </property>
@@ -388,6 +416,13 @@
       <red>255</red>
       <green>255</green>
       <blue>0</blue>
+     </color>
+    </property>
+    <property name="offColor" stdset="0">
+     <color>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
      </color>
     </property>
     <property name="labelPosition" stdset="0">

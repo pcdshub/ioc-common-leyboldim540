@@ -11,8 +11,8 @@
 #
 record(bi, "$(DEV):GET_EMI_CH$(CH)") {
     field(DESC, "Emision status for CH$(CH)")
-    field(INP,  "$(DEV):STAT_CH$(CH).B5 CPP NMS")
     field(SCAN, "$(DSCAN) second")
+    field(INP,  "$(DEV):STAT_CH$(CH).B5 CPP NMS")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(ZSV,  "NO_ALARM")
@@ -29,10 +29,9 @@ record(bo, "$(DEV):SET_EMI_CH$(CH)") {
 
 record(mbbi, "$(DEV):GET_RSC_OUT$(CH)") {
     field(DESC, "Get scalling of rec. out CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSC($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getRSC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -67,13 +66,12 @@ record(mbbo, "$(DEV):SET_RSC_OUT$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(ai, "$(DEV):GET_RSL_OUT$(CH)")
+record(bo, "$(DEV):GET_RSL_OUT$(CH)")
 {
     field(DESC, "Get recorder scale lim. CH$(CH)")
-    field(PINI, "YES")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSL($(CH),$(DEV):RSL_LOW_OUT$(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
+    field(SCAN, "$(CSCAN) second")
+    field(OUT,  "@IM540.proto getRSL($(CH),$(DEV):RSL_LOW_OUT$(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
 }
 
 record(ai, "$(DEV):RSL_LOW_OUT$(CH)") {
@@ -111,10 +109,9 @@ record(ao, "$(DEV):SET_RSL_HIGH_OUT$(CH)") {
 
 record(bi, "$(DEV):GET_RSM_OUT$(CH)") {
     field(DESC, "Get rec. scale mode CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSM($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getRSM($(CH)) $(PORT)")
     field(ZNAM, "LIN_SCALE")
     field(ONAM, "LOG_SCALE")
     field(ZSV,  "NO_ALARM")
@@ -135,10 +132,9 @@ record(bo, "$(DEV):SET_RSM_OUT$(CH)") {
 
 record(mbbi, "$(DEV):GET_RSO_OUT$(CH)") {
     field(DESC, "Get CH assign to rec. out (CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getRSO($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getRSO($(CH)) $(PORT)")
     field(ZRVL, "1")
     field(ONVL, "2")
     field(TWVL, "3")
@@ -185,21 +181,20 @@ record(mbbo, "$(DEV):SET_RSO_OUT$(CH)") {
     field(FVSV, "NO_ALARM")
 }
 
-record(ai, "$(DEV):GET_SAC_$(CH)") {
+record(ai, "$(DEV):GET_SAC_CH$(CH)") {
     field(DESC, "Get sens. amplification corr. CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getSAC($(CH)) $(PORT)")
-    field(SCAN, "$(CSCAN) second")
     field(EGU,  "")
     field(PREC, "2")
 }
 
-record(ao, "$(DEV):SET_SAC_$(CH)") {
+record(ao, "$(DEV):SET_SAC_CH$(CH)") {
     field(DESC, "Set sens. amplification corr. CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSAC($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):SET_SAC_$(CH)")
+    field(FLNK, "$(DEV):GET_SAC_CH$(CH)")
     field(DRVH, "9.99")
     field(DRVL, "0.10")
     field(EGU,  "")
@@ -208,10 +203,9 @@ record(ao, "$(DEV):SET_SAC_$(CH)") {
 
 record(mbbi, "$(DEV):GET_SAS_CH$(CH)") {
     field(DESC, "Get sens amp. for (CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getSAS($(CH)) $(PORT)")
     field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSAS($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
     field(TWVL, "2")
@@ -242,9 +236,8 @@ record(mbbo, "$(DEV):SET_SAS_CH$(CH)") {
 record(ai, "$(DEV):GET_SFP_CH$(CH)")
 {
     field(DESC, "Get sens filament pow CH$(CH)")
-    field(PINI, "YES")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getSFP($(CH)) $(PORT)")
     field(PREC, "1")
     field(EGU,  "W")
@@ -264,9 +257,8 @@ record(ao, "$(DEV):SET_SFP_CH$(CH)") {
 record(ai, "$(DEV):GET_SSV_CH$(CH)")
 {
     field(DESC, "Get sensitivity CH$(CH)")
-    field(PINI, "YES")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getSSV($(CH)) $(PORT)")
     field(PREC, "2")
     field(EGU,  "")
@@ -302,9 +294,8 @@ record(ao, "$(DEV):SET_SSV_CH$(CH)")
 record(ai, "$(DEV):GET_SXR_CH$(CH)")
 {
     field(DESC, "Get X-Ray Limit CH$(CH)")
-    field(PINI, "YES")
-    field(SCAN, "$(CSCAN) second")
     field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
     field(INP,  "@IM540.proto getSXR($(CH)) $(PORT)")
     field(PREC, "2")
 }
@@ -322,21 +313,19 @@ record(ao, "$(DEV):SET_SXR_CH$(CH)") {
 record(ai, "$(DEV):GET_ISO_CH$(CH)")
 {
     field(DESC, "Get curr. offset CH$(CH)")
-    field(PINI, "YES")
     field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getISO($(CH)) $(PORT)")
-    field(SCAN, "$(CSCAN) second")
     field(PREC, "0")
-    field(EGU,  "")
+    field(EGU,  "DAC Uni")
 }
 
-record(ai, "$(DEV):GET_IST_CH$(CH)")
+record(bo, "$(DEV):GET_IST_CH$(CH)")
 {
     field(DESC, "Op. time of BAG and EXT syst.")
-    field(PINI, "YES")
     field(DTYP, "stream")
-    field(INP,  "@IM540.proto getIST($(CH),$(DEV):IST_BAG_CH$(CH),$(DEV):IST_EXT_CH$(CH)) $(PORT)")
     field(SCAN, "10 second")
+    field(OUT,  "@IM540.proto getIST($(CH),$(DEV):IST_BAG_CH$(CH),$(DEV):IST_EXT_CH$(CH)) $(PORT)")
 }
 
 record(ai, "$(DEV):IST_BAG_CH$(CH)") {
