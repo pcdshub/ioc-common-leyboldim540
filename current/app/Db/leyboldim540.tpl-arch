@@ -1,11 +1,15 @@
-#$(BASE):TEMP_SET_RBV                60 monitor
-#$(BASE):MOTOR_SPEED_SET_RBV         60 monitor
-#$(BASE):MOTOR_DEGREES_SET_RBV       60 monitor
-#$(BASE):MOTOR_DWELL_SET_RBV         60 monitor
-#$(BASE):CURRENT_TEMP_RBV            60 monitor
-#$(BASE):MOTOR_RBV                   60 monitor
-#$(BASE):ALARM_LOW_INPUT_VOLTAGE_RBV 60 monitor
-#$(BASE):ALARM_THERMISTER_ERROR_RBV  60 monitor
-#$(BASE):ALARM_OVER_CURRENT_RBV      60 monitor
-#$(BASE):ALARM_LOW_TEMP_RBV          60 monitor
-#$(BASE):ALARM_HIGH_TEMP_RBV         60 monitor
+$(BASE):GET_GDE                  60 monitor
+$(BASE):GET_ISE                  60 monitor
+$(BASE):GET_ISW                  60 monitor
+$(BASE):GET_VSE                  60 monitor
+$(BASE):GET_VSW                  60 monitor
+$(BASE):GET_UNI                  60 monitor
+$(BASE):GET_IEC                  60 monitor
+$(BASE):GET_GAV                  60 monitor
+$(BASE):GET_GCV                  60 monitor
+$(BASE):GET_GEC                  60 monitor
+$(BASE):GET_GFC                  60 monitor
+$(BASE):GET_GFP                  60 monitor
+$(BASE):GET_GFU                  60 monitor
+$(BASE):GET_GRV                  60 monitor
+

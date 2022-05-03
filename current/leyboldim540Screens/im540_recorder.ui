@@ -262,7 +262,7 @@
     <item>
      <widget class="QLabel" name="label_6">
       <property name="text">
-       <string>Lower and Upper limit can be set in SCALE_USER mode!</string>
+       <string>Lower and Upper limit can be set only in SCALE_USER mode!</string>
       </property>
      </widget>
     </item>

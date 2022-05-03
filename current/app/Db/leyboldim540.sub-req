@@ -12,3 +12,15 @@ file leyboldim540.tpl-req
         { BASE = $(BASE) }
 }    
 
+file leyboldim540_ch12.tpl-req
+{
+        { BASE = $(BASE), N = 1 }
+        { BASE = $(BASE), N = 2 }
+}
+
+file leyboldim540_ch34.tpl-req
+{
+        { BASE = $(BASE), N = 3 }
+        { BASE = $(BASE), N = 4 }
+}
+
