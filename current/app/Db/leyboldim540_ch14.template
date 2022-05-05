@@ -82,7 +82,7 @@ record(bi, "$(DEV):GET_CAO_CH$(CH)") {
     field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-	field(ZSV,  "NO_ALARM")
+    field(ZSV,  "NO_ALARM")
     field(OSV,  "NO_ALARM")
 }
 
@@ -390,7 +390,7 @@ record(fanout, "$(DEV):UNI_FANOUT_CH$(CH)")
     field(LNK1, "$(DEV):UNI_SCL_HIGH_CH$(CH)")
     field(LNK2, "$(DEV):UNI_SCL_SET_LOW_CH$(CH)")
     field(LNK3, "$(DEV):UNI_SCL_SET_HIGH_CH$(CH)")
-	field(LNK4, "$(DEV):UNI_SRL_LOW_CH$(CH)")
+    field(LNK4, "$(DEV):UNI_SRL_LOW_CH$(CH)")
     field(LNK5, "$(DEV):UNI_SRL_HIGH_CH$(CH)")
 }
 

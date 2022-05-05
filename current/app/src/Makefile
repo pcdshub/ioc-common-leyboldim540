@@ -24,7 +24,7 @@ leyboldim540_DBD += asyn.dbd
 leyboldim540_DBD += stream.dbd
 leyboldim540_DBD += drvAsynIPPort.dbd
 leyboldim540_DBD += drvAsynSerialPort.dbd
-coolerShaker_DBD += caPutLog.dbd
+leyboldim540_DBD += caPutLog.dbd
 
 # <name>_registerRecordDeviceDriver.cpp will be created from <name>.dbd
 leyboldim540_SRCS += leyboldim540_registerRecordDeviceDriver.cpp
@@ -37,7 +37,7 @@ leyboldim540_LIBS += devIocStats
 leyboldim540_LIBS += autosave
 leyboldim540_LIBS += asyn
 leyboldim540_LIBS += stream
-coolerShaker_LIBS += caPutLog
+leyboldim540_LIBS += caPutLog
 leyboldim540_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================

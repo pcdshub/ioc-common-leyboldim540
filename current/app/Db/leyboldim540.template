@@ -39,14 +39,14 @@ record(mbbiDirect, "$(DEV):GET_GDE")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getGDE $(PORT)")
     field(SCAN, "$(CSCAN) second")
-	field(FLNK, "$(DEV):STATUSCALC")
+    field(FLNK, "$(DEV):STATUSCALC")
 }
 
 record(calc, "$(DEV):STATUSCALC")
 {
     field(CALC, "A>B?1:0")
     field(INPA, "$(DEV):GET_GDE.VAL PP")
-	field(INPB, "0")
+    field(INPB, "0")
     field(FLNK, "$(DEV):DEV_STATUS")
 }
 

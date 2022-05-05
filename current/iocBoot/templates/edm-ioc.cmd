@@ -13,8 +13,5 @@ source /reg/g/pcds/pyps/conda/py36env.sh
 pushd $$IOCTOP/leyboldim540Screens
 
 $$LOOP(LEYBOLD)
-export IOC_PV=$$IOC_PV
-export BASE=$$BASE
-pydm -m "DEV=${BASE},IOC=${IOC_PV}" im540.ui &
-
+pydm -m "DEV=$$BASE,IOC=$$IOC_PV" im540.ui &
 $$ENDLOOP(LEYBOLD)
