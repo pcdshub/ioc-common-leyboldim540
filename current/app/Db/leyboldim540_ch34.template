@@ -9,8 +9,9 @@
 #   CHANNEL NUMBER
 #
 #
-## Make calculation so I will be able to select betwen 18 values (mbbi support only up to 16 values)
-record(longin, "$(DEV):GET_CST_RAW_CH$(CH)") {
+##TODO: Make calculation so I will be able to select betwen 18 values (mbbi support only up to 16 values)
+record(longin, "$(DEV):GET_CST_RAW_CH$(CH)")
+{
     field(DESC, "Get Sens. Type on CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -19,7 +20,8 @@ record(longin, "$(DEV):GET_CST_RAW_CH$(CH)") {
     field(HOPR, "17")
 }
 
-record(longout, "$(DEV):SET_CST_RAW_CH$(CH)") {
+record(longout, "$(DEV):SET_CST_RAW_CH$(CH)")
+{
     field(DESC, "Set Sens. Type on CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setCST($(CH)) $(PORT)")
@@ -46,14 +48,16 @@ record(bo, "$(DEV):GET_IST_CH$(CH)")
     field(OUT,  "@IM540.proto getIST($(CH),$(DEV):IST_TTR_CH$(CH),$(DEV):IST_CTR_CH$(CH)) $(PORT)")
 }
 
-record(ai, "$(DEV):IST_TTR_CH$(CH)") {
+record(ai, "$(DEV):IST_TTR_CH$(CH)")
+{
     field(DESC, "Operation time TTR syst.")
     field(DTYP, "Soft Channel")
     field(PREC, "1")
     field(EGU,  "h")
 }
 
-record(ai, "$(DEV):IST_CTR_CH$(CH)") {
+record(ai, "$(DEV):IST_CTR_CH$(CH)")
+{
     field(DESC, "Operation time CTR syst.")
     field(DTYP, "Soft Channel")
     field(PREC, "1")

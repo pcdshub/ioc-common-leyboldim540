@@ -13,10 +13,10 @@ PROD_IOC = leyboldim540
 
 PROD_SYS_LIBS_DEFAULT += pcre
 
-# vat590.dbd will be created and installed
+# leyboldim540.dbd will be created and installed
 DBD += leyboldim540.dbd
 
-# vat590.dbd will be made up from these files:
+# leyboldim540.dbd will be made up from these files:
 leyboldim540_DBD += base.dbd
 leyboldim540_DBD += iocAdmin.dbd
 leyboldim540_DBD += asSupport.dbd

@@ -9,10 +9,11 @@
 #   CHANNEL NUMBER
 #
 #
-record(mbbi, "$(DEV):GET_OFC_CH$(CH)") {
+record(mbbi, "$(DEV):GET_OFC_CH$(CH)")
+{
     field(DESC, "Offset correction of CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
@@ -25,7 +26,8 @@ record(mbbi, "$(DEV):GET_OFC_CH$(CH)") {
     field(TWSV, "NO_ALARM")
 }
 
-record(bo, "$(DEV):SET_OFC_CH$(CH)") {
+record(bo, "$(DEV):SET_OFC_CH$(CH)")
+{
     field(DESC, "Set Offset correction of CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setOFC($(CH)) $(PORT)")
@@ -36,10 +38,11 @@ record(bo, "$(DEV):SET_OFC_CH$(CH)") {
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_BCC_CH$(CH)") {
+record(mbbi, "$(DEV):GET_BCC_CH$(CH)")
+{
     field(DESC, "Get const. emi current CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
@@ -56,7 +59,8 @@ record(mbbi, "$(DEV):GET_BCC_CH$(CH)") {
 }
 
 ## Addressed sensor must be a BAG system (IE 414) (check if only CH1 and CH2 should be addressed here)
-record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
+record(mbbo, "$(DEV):SET_BCC_CH$(CH)")
+{
     field(DESC, "Set const. emi current CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setBCC($(CH)) $(PORT)")
@@ -75,7 +79,8 @@ record(mbbo, "$(DEV):SET_BCC_CH$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(bi, "$(DEV):GET_CAO_CH$(CH)") {
+record(bi, "$(DEV):GET_CAO_CH$(CH)")
+{
     field(DESC, "Get Offset auto correction CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -87,7 +92,8 @@ record(bi, "$(DEV):GET_CAO_CH$(CH)") {
 }
 
 ## Addressed sensor must be a CTR system (check if only CH3 and CH4 should be addressed here)
-record(bo, "$(DEV):SET_CAO_CH$(CH)") {
+record(bo, "$(DEV):SET_CAO_CH$(CH)")
+{
     field(DESC, "Set Offset auto correction CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setCAO($(CH)) $(PORT)")
@@ -98,7 +104,8 @@ record(bo, "$(DEV):SET_CAO_CH$(CH)") {
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SCC_CH$(CH)") {
+record(mbbi, "$(DEV):GET_SCC_CH$(CH)")
+{
     field(DESC, "Get CH that controls a sensor on CH(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -120,7 +127,8 @@ record(mbbi, "$(DEV):GET_SCC_CH$(CH)") {
     field(FRSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SCC_CH$(CH)") {
+record(mbbo, "$(DEV):SET_SCC_CH$(CH)")
+{
     field(DESC, "Set CH that controls a sensor on CH(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCC($(CH)) $(PORT)")
@@ -146,7 +154,7 @@ record(bo, "$(DEV):GET_SCL_CH$(CH)")
 {
     field(DESC, "Get sensor cntrl. lim. CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(OUT,  "@IM540.proto getSCL($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
 }
 
@@ -165,7 +173,8 @@ record(ai, "$(DEV):SCL_HIGH_CH$(CH)")
 }
 
 ## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
-record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)") {
+record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)")
+{
     field(DESC, "Set startup limit CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCL_LOW($(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
@@ -176,7 +185,8 @@ record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)") {
 }
 
 ## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
-record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)") {
+record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)")
+{
     field(DESC, "Set shutdown limit CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCL_HIGH($(CH),$(DEV):SCL_LOW_CH$(CH)) $(PORT)")
@@ -186,7 +196,8 @@ record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)") {
     field(PREC, "4")
 }
 
-record(mbbi, "$(DEV):GET_SCM_CH$(CH)") {
+record(mbbi, "$(DEV):GET_SCM_CH$(CH)")
+{
     field(DESC, "Get sens. control mode CH(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -205,7 +216,8 @@ record(mbbi, "$(DEV):GET_SCM_CH$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SCM_CH$(CH)") {
+record(mbbo, "$(DEV):SET_SCM_CH$(CH)")
+{
     field(DESC, "Set sens. control mode CH(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCM($(CH)) $(PORT)")
@@ -224,7 +236,8 @@ record(mbbo, "$(DEV):SET_SCM_CH$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SGC_CH$(CH)") {
+record(mbbi, "$(DEV):GET_SGC_CH$(CH)")
+{
     field(DESC, "Get sens. gas correction CH(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -258,7 +271,8 @@ record(mbbi, "$(DEV):GET_SGC_CH$(CH)") {
     field(EISV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SGC_CH$(CH)") {
+record(mbbo, "$(DEV):SET_SGC_CH$(CH)")
+{
     field(DESC, "Set sens. gas correction CH(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSGC($(CH)) $(PORT)")
@@ -292,7 +306,8 @@ record(mbbo, "$(DEV):SET_SGC_CH$(CH)") {
     field(EISV, "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SMF_CH$(CH)") {
+record(mbbi, "$(DEV):GET_SMF_CH$(CH)")
+{
     field(DESC, "Get measuring filter CH(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -311,7 +326,8 @@ record(mbbi, "$(DEV):GET_SMF_CH$(CH)") {
     field(THSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SMF_CH$(CH)") {
+record(mbbo, "$(DEV):SET_SMF_CH$(CH)")
+{
     field(DESC, "Set measuring filter CH(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSMF($(CH)) $(PORT)")
@@ -334,25 +350,28 @@ record(bo, "$(DEV):GET_SRL_CH$(CH)")
 {
     field(DESC, "Get sensor lim. CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(OUT,  "@IM540.proto getSRL($(CH),$(DEV):SRL_LOW_CH$(CH),$(DEV):SRL_HIGH_CH$(CH)) $(PORT)")
 }
 
-record(ao, "$(DEV):SRL_LOW_CH$(CH)") {
+record(ao, "$(DEV):SRL_LOW_CH$(CH)")
+{
     field(DESC, "SRL Lower limit CH$(CH)")
     field(DTYP, "Soft Channel")
 #    field(OUT,  "$(DEV):PRESS_CH$(CH).LOPR")
     field(PREC, "4")
 }
 
-record(ao, "$(DEV):SRL_HIGH_CH$(CH)") {
+record(ao, "$(DEV):SRL_HIGH_CH$(CH)")
+{
     field(DESC, "SRL Upper limit CH$(CH)")
     field(DTYP, "Soft Channel")
 #    field(OUT,  "$(DEV):PRESS_CH$(CH).HOPR")
     field(PREC, "4")
 }
 
-record(longin, "$(DEV):GET_STI_RAW_CH$(CH)") {
+record(longin, "$(DEV):GET_STI_RAW_CH$(CH)")
+{
     field(DESC, "Get Sens. Type on CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")

@@ -11,7 +11,7 @@ record(bo, "$(DEV):RESET_ERR")
 {
     field(DESC, "Reset error condition")
     field(DTYP, "stream")
-    field(OUT, "@IM540.proto resetError $(PORT)")
+    field(OUT,  "@IM540.proto resetError $(PORT)")
     field(ZNAM, "RESET")
     field(ONAM, "RESET")
 }
@@ -20,7 +20,7 @@ record(bo, "$(DEV):RESET_DEVICE")
 {
     field(DESC, "Trigg. SW reset")
     field(DTYP, "stream")
-    field(OUT, "@IM540.proto resetDevice $(PORT)")
+    field(OUT,  "@IM540.proto resetDevice $(PORT)")
     field(ZNAM, "RESET")
     field(ONAM, "RESET")
 }
@@ -38,7 +38,7 @@ record(mbbiDirect, "$(DEV):GET_GDE")
     field(DESC, "Global device Error")
     field(DTYP, "stream")
     field(INP,  "@IM540.proto getGDE $(PORT)")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(FLNK, "$(DEV):STATUSCALC")
 }
 
@@ -108,7 +108,7 @@ record(mbbiDirect, "$(DEV):STAT_CH1")
 
 record(ai, "$(DEV):PRESS_CH1")
 {
-    field(DESC, "Measuring value on CH1")
+    field(DESC, "Pressure measurement on CH1")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }
@@ -121,7 +121,7 @@ record(mbbiDirect, "$(DEV):STAT_CH2")
 
 record(ai, "$(DEV):PRESS_CH2")
 {
-    field(DESC, "Measuring value on CH2")
+    field(DESC, "Pressure measurement on CH2")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }
@@ -134,7 +134,7 @@ record(mbbiDirect, "$(DEV):STAT_CH3")
 
 record(ai, "$(DEV):PRESS_CH3")
 {
-    field(DESC, "Measuring value on CH3")
+    field(DESC, "Pressure measurement on CH3")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }
@@ -147,7 +147,7 @@ record(mbbiDirect, "$(DEV):STAT_CH4")
 
 record(ai, "$(DEV):PRESS_CH4")
 {
-    field(DESC, "Measuring value on CH4")
+    field(DESC, "Pressure measurement on CH4")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }

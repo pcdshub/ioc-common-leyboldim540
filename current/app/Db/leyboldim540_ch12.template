@@ -9,7 +9,8 @@
 #   CHANNEL NUMBER
 #
 #
-record(bi, "$(DEV):GET_EMI_CH$(CH)") {
+record(bi, "$(DEV):GET_EMI_CH$(CH)")
+{
     field(DESC, "Emision status for CH$(CH)")
     field(SCAN, "$(DSCAN) second")
     field(INP,  "$(DEV):STAT_CH$(CH).B5 CPP NMS")
@@ -19,7 +20,8 @@ record(bi, "$(DEV):GET_EMI_CH$(CH)") {
     field(OSV,  "NO_ALARM")
 }
 
-record(bo, "$(DEV):SET_EMI_CH$(CH)") {
+record(bo, "$(DEV):SET_EMI_CH$(CH)")
+{
     field(DESC, "Turn OFF/ON emission on CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setEMI($(CH)) $(PORT)")
@@ -27,7 +29,8 @@ record(bo, "$(DEV):SET_EMI_CH$(CH)") {
     field(ONAM, "ON")
 }
 
-record(mbbi, "$(DEV):GET_RSC_OUT$(CH)") {
+record(mbbi, "$(DEV):GET_RSC_OUT$(CH)")
+{
     field(DESC, "Get scalling of rec. out CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -47,7 +50,8 @@ record(mbbi, "$(DEV):GET_RSC_OUT$(CH)") {
 }
 
 ## This command allowed only in IM540 MODE
-record(mbbo, "$(DEV):SET_RSC_OUT$(CH)") {
+record(mbbo, "$(DEV):SET_RSC_OUT$(CH)")
+{
     field(DESC, "Set scalling of rec. out CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSC($(CH)) $(PORT)")
@@ -70,24 +74,27 @@ record(bo, "$(DEV):GET_RSL_OUT$(CH)")
 {
     field(DESC, "Get recorder scale lim. CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(OUT,  "@IM540.proto getRSL($(CH),$(DEV):RSL_LOW_OUT$(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
 }
 
-record(ai, "$(DEV):RSL_LOW_OUT$(CH)") {
+record(ai, "$(DEV):RSL_LOW_OUT$(CH)")
+{
     field(DESC, "Low P limit of rec. scale CH$(CH)")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }
 
-record(ai, "$(DEV):RSL_HIGH_OUT$(CH)") {
+record(ai, "$(DEV):RSL_HIGH_OUT$(CH)")
+{
     field(DESC, "Upper P limit of rec. scale CH$(CH)")
     field(DTYP, "Soft Channel")
     field(PREC, "4")
 }
 
 ## This command allowed only in IM540 MODE and if scalling is NOT set to SCALE_USER
-record(ao, "$(DEV):SET_RSL_LOW_OUT$(CH)") {
+record(ao, "$(DEV):SET_RSL_LOW_OUT$(CH)")
+{
     field(DESC, "Set lower P lim of rec. scale CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSL_LOW($(CH),$(DEV):RSL_HIGH_OUT$(CH)) $(PORT)")
@@ -97,7 +104,8 @@ record(ao, "$(DEV):SET_RSL_LOW_OUT$(CH)") {
     field(PREC, "4")
 }
 
-record(ao, "$(DEV):SET_RSL_HIGH_OUT$(CH)") {
+record(ao, "$(DEV):SET_RSL_HIGH_OUT$(CH)")
+{
     field(DESC, "Set Upper P lim of rec. scale CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSL_HIGH($(CH),$(DEV):RSL_LOW_OUT$(CH)) $(PORT)")
@@ -107,7 +115,8 @@ record(ao, "$(DEV):SET_RSL_HIGH_OUT$(CH)") {
     field(PREC, "4")
 }
 
-record(bi, "$(DEV):GET_RSM_OUT$(CH)") {
+record(bi, "$(DEV):GET_RSM_OUT$(CH)")
+{
     field(DESC, "Get rec. scale mode CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -119,7 +128,8 @@ record(bi, "$(DEV):GET_RSM_OUT$(CH)") {
 }
 
 ## This command allowed only in IM540 MODE
-record(bo, "$(DEV):SET_RSM_OUT$(CH)") {
+record(bo, "$(DEV):SET_RSM_OUT$(CH)")
+{
     field(DESC, "Set rec. scale mode CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSM($(CH)) $(PORT)")
@@ -130,7 +140,8 @@ record(bo, "$(DEV):SET_RSM_OUT$(CH)") {
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_RSO_OUT$(CH)") {
+record(mbbi, "$(DEV):GET_RSO_OUT$(CH)")
+{
     field(DESC, "Get CH assign to rec. out (CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
@@ -156,7 +167,8 @@ record(mbbi, "$(DEV):GET_RSO_OUT$(CH)") {
 }
 
 ## This command allowed only in IM540 MODE
-record(mbbo, "$(DEV):SET_RSO_OUT$(CH)") {
+record(mbbo, "$(DEV):SET_RSO_OUT$(CH)")
+{
     field(DESC, "Set CH assign to rec. out (CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setRSO($(CH)) $(PORT)")
@@ -181,7 +193,8 @@ record(mbbo, "$(DEV):SET_RSO_OUT$(CH)") {
     field(FVSV, "NO_ALARM")
 }
 
-record(ai, "$(DEV):GET_SAC_CH$(CH)") {
+record(ai, "$(DEV):GET_SAC_CH$(CH)")
+{
     field(DESC, "Get sens. amplification corr. CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(DSCAN) second")
@@ -190,7 +203,8 @@ record(ai, "$(DEV):GET_SAC_CH$(CH)") {
     field(PREC, "2")
 }
 
-record(ao, "$(DEV):SET_SAC_CH$(CH)") {
+record(ao, "$(DEV):SET_SAC_CH$(CH)")
+{
     field(DESC, "Set sens. amplification corr. CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSAC($(CH)) $(PORT)")
@@ -201,10 +215,11 @@ record(ao, "$(DEV):SET_SAC_CH$(CH)") {
     field(PREC, "2")
 }
 
-record(mbbi, "$(DEV):GET_SAS_CH$(CH)") {
+record(mbbi, "$(DEV):GET_SAS_CH$(CH)")
+{
     field(DESC, "Get sens amp. for (CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getSAS($(CH)) $(PORT)")
     field(ZRVL, "0")
     field(ONVL, "1")
@@ -217,7 +232,8 @@ record(mbbi, "$(DEV):GET_SAS_CH$(CH)") {
     field(TWSV, "NO_ALARM")
 }
 
-record(mbbo, "$(DEV):SET_SAS_CH$(CH)") {
+record(mbbo, "$(DEV):SET_SAS_CH$(CH)")
+{
     field(DESC, "Set sens amp. for (CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSAS($(CH)) $(PORT)")
@@ -243,7 +259,8 @@ record(ai, "$(DEV):GET_SFP_CH$(CH)")
     field(EGU,  "W")
 }
 
-record(ao, "$(DEV):SET_SFP_CH$(CH)") {
+record(ao, "$(DEV):SET_SFP_CH$(CH)")
+{
     field(DESC, "Set sens filament pow threshold CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSFP($(CH)) $(PORT)")
@@ -295,12 +312,13 @@ record(ai, "$(DEV):GET_SXR_CH$(CH)")
 {
     field(DESC, "Get X-Ray Limit CH$(CH)")
     field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
+    field(SCAN, "$(DSCAN) second")
     field(INP,  "@IM540.proto getSXR($(CH)) $(PORT)")
     field(PREC, "2")
 }
 
-record(ao, "$(DEV):SET_SXR_CH$(CH)") {
+record(ao, "$(DEV):SET_SXR_CH$(CH)")
+{
     field(DESC, "Set X-Ray Limit CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSXR($(CH)) $(PORT)")
@@ -328,14 +346,16 @@ record(bo, "$(DEV):GET_IST_CH$(CH)")
     field(OUT,  "@IM540.proto getIST($(CH),$(DEV):IST_BAG_CH$(CH),$(DEV):IST_EXT_CH$(CH)) $(PORT)")
 }
 
-record(ai, "$(DEV):IST_BAG_CH$(CH)") {
+record(ai, "$(DEV):IST_BAG_CH$(CH)")
+{
     field(DESC, "Operation time BAG syst.")
     field(DTYP, "Soft Channel")
     field(PREC, "1")
     field(EGU,  "h")
 }
 
-record(ai, "$(DEV):IST_EXT_CH$(CH)") {
+record(ai, "$(DEV):IST_EXT_CH$(CH)")
+{
     field(DESC, "Operation time EXT syst.")
     field(DTYP, "Soft Channel")
     field(PREC, "1")
