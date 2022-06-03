@@ -286,7 +286,8 @@ record(calcout, "$(DEV):SSV_LOW_CALC_CH$(CH)")
 {
     field(SCAN, "$(DSCAN) second")
     field(CALC, "A=1?5:A=2?1:5")
-    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+#    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL")
     field(OUT, "$(DEV):SET_SSV_CH$(CH).DRVL")
 }
 
@@ -294,7 +295,8 @@ record(calcout, "$(DEV):SSV_HIGH_CALC_CH$(CH)")
 {
     field(SCAN, "$(DSCAN) second")
     field(CALC, "A=1?30:A=2?20:20")
-    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+#    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL")
     field(OUT, "$(DEV):SET_SSV_CH$(CH).DRVH")
 }
 

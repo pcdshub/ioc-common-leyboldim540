@@ -45,7 +45,8 @@ record(mbbiDirect, "$(DEV):GET_GDE")
 record(calc, "$(DEV):STATUSCALC")
 {
     field(CALC, "A>B?1:0")
-    field(INPA, "$(DEV):GET_GDE.VAL PP")
+#    field(INPA, "$(DEV):GET_GDE.VAL PP")
+    field(INPA, "$(DEV):GET_GDE.VAL")
     field(INPB, "0")
     field(FLNK, "$(DEV):DEV_STATUS")
 }

@@ -385,7 +385,8 @@ record(calc, "$(DEV):STI_CALC_CH$(CH)")
 {
     field(SCAN, "$(DSCAN) second")
     field(CALC, "A<=3?A:4")
-    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+#    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL PP")
+    field(INPA, "$(DEV):GET_STI_RAW_CH$(CH).VAL")
     field(FLNK, "$(DEV):STI_CH$(CH)")
 }
 
