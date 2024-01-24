@@ -38,75 +38,9 @@ record(bo, "$(DEV):SET_OFC_CH$(CH)")
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_BCC_CH$(CH)")
-{
-    field(DESC, "Get const. emi current CH$(CH)")
-    field(DTYP, "stream")
-    field(SCAN, "$(DSCAN) second")
-    field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(THVL, "3")
-    field(ZRST, "AUTO")
-    field(ONST, "0.1 mA")
-    field(TWST, "1.0 mA")
-    field(THST, "10.0 mA")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-    field(THSV, "NO_ALARM")
-}
-
-## Addressed sensor must be a BAG system (IE 414) (check if only CH1 and CH2 should be addressed here)
-record(mbbo, "$(DEV):SET_BCC_CH$(CH)")
-{
-    field(DESC, "Set const. emi current CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setBCC($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):GET_BCC_CH$(CH)")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(THVL, "3")
-    field(ZRST, "AUTO")
-    field(ONST, "0.1 mA")
-    field(TWST, "1.0 mA")
-    field(THST, "10.0 mA")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-    field(THSV, "NO_ALARM")
-}
-
-record(bi, "$(DEV):GET_CAO_CH$(CH)")
-{
-    field(DESC, "Get Offset auto correction CH$(CH)")
-    field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
-    field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
-    field(ZNAM, "OFF")
-    field(ONAM, "ON")
-    field(ZSV,  "NO_ALARM")
-    field(OSV,  "NO_ALARM")
-}
-
-## Addressed sensor must be a CTR system (check if only CH3 and CH4 should be addressed here)
-record(bo, "$(DEV):SET_CAO_CH$(CH)")
-{
-    field(DESC, "Set Offset auto correction CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setCAO($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):GET_CAO_CH$(CH)")
-    field(ZNAM, "OFF")
-    field(ONAM, "ON")
-    field(ZSV,  "NO_ALARM")
-    field(OSV,  "NO_ALARM")
-}
-
 record(mbbi, "$(DEV):GET_SCC_CH$(CH)")
 {
-    field(DESC, "Get CH that controls a sensor on CH(CH)")
+    field(DESC, "Get CH that controls a sensor on CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "$(CSCAN) second")
     field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
@@ -129,7 +63,7 @@ record(mbbi, "$(DEV):GET_SCC_CH$(CH)")
 
 record(mbbo, "$(DEV):SET_SCC_CH$(CH)")
 {
-    field(DESC, "Set CH that controls a sensor on CH(CH)")
+    field(DESC, "Set CH that controls a sensor on CH$(CH)")
     field(DTYP, "stream")
     field(OUT,  "@IM540.proto setSCC($(CH)) $(PORT)")
     field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control

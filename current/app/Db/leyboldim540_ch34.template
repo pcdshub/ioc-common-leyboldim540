@@ -63,3 +63,28 @@ record(ai, "$(DEV):IST_CTR_CH$(CH)")
     field(PREC, "1")
     field(EGU,  "h")
 }
+
+record(bi, "$(DEV):GET_CAO_CH$(CH)")
+{
+    field(DESC, "Get Offset auto correction CH$(CH)")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getCAO($(CH)) $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+## Addressed sensor must be a CTR system (check if only CH3 and CH4 should be addressed here)
+record(bo, "$(DEV):SET_CAO_CH$(CH)")
+{
+    field(DESC, "Set Offset auto correction CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setCAO($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_CAO_CH$(CH)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}

@@ -29,6 +29,26 @@ record(bo, "$(DEV):SET_EMI_CH$(CH)")
     field(ONAM, "ON")
 }
 
+record(bi, "$(DEV):GET_DGS")
+{
+    field(DESC, "Get degassing status")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "$(DEV):STAT_CH$(CH).B6 CPP NMS")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(bo, "$(DEV):SET_DGS")
+{
+    field(DESC, "Turn OFF/ON degassing")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setDGS $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+}
+
 record(mbbi, "$(DEV):GET_RSC_OUT$(CH)")
 {
     field(DESC, "Get scalling of rec. out CH$(CH)")
@@ -346,6 +366,47 @@ record(bo, "$(DEV):GET_IST_CH$(CH)")
     field(DTYP, "stream")
     field(SCAN, "10 second")
     field(OUT,  "@IM540.proto getIST($(CH),$(DEV):IST_BAG_CH$(CH),$(DEV):IST_EXT_CH$(CH)) $(PORT)")
+}
+
+record(mbbi, "$(DEV):GET_BCC_CH$(CH)")
+{
+    field(DESC, "Get const. emi current CH$(CH)")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getBCC($(CH)) $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "AUTO")
+    field(ONST, "0.1 mA")
+    field(TWST, "1.0 mA")
+    field(THST, "10.0 mA")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+}
+
+## Addressed sensor must be a BAG system (IE 414) (check if only CH1 and CH2 should be addressed here)
+record(mbbo, "$(DEV):SET_BCC_CH$(CH)")
+{
+    field(DESC, "Set const. emi current CH$(CH)")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setBCC($(CH)) $(PORT)")
+    field(FLNK, "$(DEV):GET_BCC_CH$(CH)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "AUTO")
+    field(ONST, "0.1 mA")
+    field(TWST, "1.0 mA")
+    field(THST, "10.0 mA")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
 }
 
 record(ai, "$(DEV):IST_BAG_CH$(CH)")

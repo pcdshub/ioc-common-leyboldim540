@@ -1,13 +1,13 @@
-$(BASE):PRESS_CH$(N)                60 monitor
-$(BASE):STAT_CH$(N)                 60 monitor
-$(BASE):STI_CH$(N)                  60 monitor
-$(BASE):GET_OFC_CH$(N)              60 monitor
-$(BASE):GET_ISO_CH$(N)              60 monitor
-$(BASE):SRL_HIGH_CH$(N)             60 monitor
-$(BASE):SRL_LOW_CH$(N)              60 monitor
-$(BASE):SCL_HIGH_CH$(N)             60 monitor
-$(BASE):SCL_LOW_CH$(N)              60 monitor
-$(BASE):GET_SGC_CH$(N)              60 monitor
-$(BASE):GET_CAO_CH$(N)              60 monitor
-$(BASE):GET_CST_RAW_CH$(N)          60 monitor
+#$(BASE):PRESS_CH$(N)                60 monitor
+#$(BASE):STAT_CH$(N)                 60 monitor
+#$(BASE):STI_CH$(N)                  60 monitor
+#$(BASE):GET_OFC_CH$(N)              60 monitor
+#(BASE):GET_ISO_CH$(N)              60 monitor
+#$(BASE):SRL_HIGH_CH$(N)             60 monitor
+#$(BASE):SRL_LOW_CH$(N)              60 monitor
+#$(BASE):SCL_HIGH_CH$(N)             60 monitor
+#$(BASE):SCL_LOW_CH$(N)              60 monitor
+#$(BASE):GET_SGC_CH$(N)              60 monitor
+#$(BASE):GET_CAO_CH$(N)              60 monitor
+#$(BASE):GET_CST_RAW_CH$(N)          60 monitor
 
