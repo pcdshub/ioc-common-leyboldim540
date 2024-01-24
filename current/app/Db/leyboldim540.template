@@ -61,6 +61,15 @@ record(bi, "$(DEV):DEV_STATUS")
     field(OSV,  "MAJOR")
 }
 
+record(bo, "$(DEV):SET_DGS")
+{
+    field(DESC, "Turn OFF/ON degassing")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setDGS $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+}
+
 record(mbbiDirect, "$(DEV):GET_ISE")
 {
     field(DESC, "Ioni Supply Errors")

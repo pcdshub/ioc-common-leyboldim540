@@ -29,7 +29,7 @@ record(bo, "$(DEV):SET_EMI_CH$(CH)")
     field(ONAM, "ON")
 }
 
-record(bi, "$(DEV):GET_DGS")
+record(bi, "$(DEV):GET_DGS_CH$(CH)")
 {
     field(DESC, "Get degassing status")
     field(SCAN, "$(DSCAN) second")
@@ -38,15 +38,6 @@ record(bi, "$(DEV):GET_DGS")
     field(ONAM, "ON")
     field(ZSV,  "NO_ALARM")
     field(OSV,  "NO_ALARM")
-}
-
-record(bo, "$(DEV):SET_DGS")
-{
-    field(DESC, "Turn OFF/ON degassing")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setDGS $(PORT)")
-    field(ZNAM, "OFF")
-    field(ONAM, "ON")
 }
 
 record(mbbi, "$(DEV):GET_RSC_OUT$(CH)")
