@@ -38,97 +38,97 @@ record(bo, "$(DEV):SET_OFC_CH$(CH)")
     field(OSV,  "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SCC_CH$(CH)")
-{
-    field(DESC, "Get CH that controls a sensor on CH$(CH)")
-    field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
-    field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(THVL, "3")
-    field(FRVL, "4")
-    field(ZRST, "NOT_CNTRL")
-    field(ONST, "CNTRL BY CH1")
-    field(TWST, "CNTRL BY CH2")
-    field(THST, "CNTRL BY CH3")
-    field(FRST, "CNTRL BY CH4")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-    field(THSV, "NO_ALARM")
-    field(FRSV, "NO_ALARM")
-}
+#record(mbbi, "$(DEV):GET_SCC_CH$(CH)")
+#{
+#    field(DESC, "Get CH that controls a sensor on CH$(CH)")
+#    field(DTYP, "stream")
+#    field(SCAN, "$(CSCAN) second")
+#    field(INP,  "@IM540.proto getSCC($(CH)) $(PORT)")
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(THVL, "3")
+#    field(FRVL, "4")
+#    field(ZRST, "NOT_CNTRL")
+#    field(ONST, "CNTRL BY CH1")
+#    field(TWST, "CNTRL BY CH2")
+#    field(THST, "CNTRL BY CH3")
+#    field(FRST, "CNTRL BY CH4")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#    field(THSV, "NO_ALARM")
+#    field(FRSV, "NO_ALARM")
+#}
 
-record(mbbo, "$(DEV):SET_SCC_CH$(CH)")
-{
-    field(DESC, "Set CH that controls a sensor on CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setSCC($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(THVL, "3")
-    field(FRVL, "4")
-    field(ZRST, "NOT_CNTRL")
-    field(ONST, "CNTRL BY CH1")
-    field(TWST, "CNTRL BY CH2")
-    field(THST, "CNTRL BY CH3")
-    field(FRST, "CNTRL BY CH4")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-    field(THSV, "NO_ALARM")
-    field(FRSV, "NO_ALARM")
-}
+#record(mbbo, "$(DEV):SET_SCC_CH$(CH)")
+#{
+#    field(DESC, "Set CH that controls a sensor on CH$(CH)")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setSCC($(CH)) $(PORT)")
+#    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(THVL, "3")
+#    field(FRVL, "4")
+#    field(ZRST, "NOT_CNTRL")
+#    field(ONST, "CNTRL BY CH1")
+#    field(TWST, "CNTRL BY CH2")
+#    field(THST, "CNTRL BY CH3")
+#    field(FRST, "CNTRL BY CH4")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#    field(THSV, "NO_ALARM")
+#    field(FRSV, "NO_ALARM")
+#}
 
-record(bo, "$(DEV):GET_SCL_CH$(CH)")
-{
-    field(DESC, "Get sensor cntrl. lim. CH$(CH)")
-    field(DTYP, "stream")
-    field(SCAN, "$(DSCAN) second")
-    field(OUT,  "@IM540.proto getSCL($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
-}
+#record(bo, "$(DEV):GET_SCL_CH$(CH)")
+#{
+#    field(DESC, "Get sensor cntrl. lim. CH$(CH)")
+#    field(DTYP, "stream")
+#    field(SCAN, "$(DSCAN) second")
+#    field(OUT,  "@IM540.proto getSCL($(CH),$(DEV):SCL_LOW_CH$(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
+#}
 
-record(ai, "$(DEV):SCL_LOW_CH$(CH)")
-{
-    field(DESC, "Startup limit CH$(CH)")
-    field(DTYP, "Soft Channel")
-    field(PREC, "4")
-}
+#record(ai, "$(DEV):SCL_LOW_CH$(CH)")
+#{
+#    field(DESC, "Startup limit CH$(CH)")
+#    field(DTYP, "Soft Channel")
+#    field(PREC, "4")
+#}
 
-record(ai, "$(DEV):SCL_HIGH_CH$(CH)")
-{
-    field(DESC, "Shutdown limit CH$(CH)")
-    field(DTYP, "Soft Channel")
-    field(PREC, "4")
-}
-
-## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
-record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)")
-{
-    field(DESC, "Set startup limit CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setSCL_LOW($(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
-    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
-#    field(DRVH, "")
-#    field(DRVL, "")
-    field(PREC, "4")
-}
+#record(ai, "$(DEV):SCL_HIGH_CH$(CH)")
+#{
+#    field(DESC, "Shutdown limit CH$(CH)")
+#    field(DTYP, "Soft Channel")
+#    field(PREC, "4")
+#}
 
 ## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
-record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)")
-{
-    field(DESC, "Set shutdown limit CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setSCL_HIGH($(CH),$(DEV):SCL_LOW_CH$(CH)) $(PORT)")
-    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
-#    field(DRVH, "")
-#    field(DRVL, "")
-    field(PREC, "4")
-}
+#record(ao, "$(DEV):SET_SCL_LOW_CH$(CH)")
+#{
+#    field(DESC, "Set startup limit CH$(CH)")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setSCL_LOW($(CH),$(DEV):SCL_HIGH_CH$(CH)) $(PORT)")
+#    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+##    field(DRVH, "")
+##    field(DRVL, "")
+#    field(PREC, "4")
+#}
+
+## The sensor control mode of the addressed sensor must be set to AUTO or SELF.
+#record(ao, "$(DEV):SET_SCL_HIGH_CH$(CH)")
+#{
+#    field(DESC, "Set shutdown limit CH$(CH)")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setSCL_HIGH($(CH),$(DEV):SCL_LOW_CH$(CH)) $(PORT)")
+#    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+##    field(DRVH, "")
+##    field(DRVL, "")
+#    field(PREC, "4")
+#}
 
 record(mbbi, "$(DEV):GET_SCM_CH$(CH)")
 {
@@ -338,47 +338,47 @@ record(mbbi, "$(DEV):STI_CH$(CH)")
 record(fanout, "$(DEV):UNI_FANOUT_CH$(CH)")
 {
     field(DESC, "Fanout pressure units")
-    field(SCAN, "$(DSCAN) second")
+    field(SCAN, "1 second")
     field(SELM, "All")
-    field(LNK0, "$(DEV):UNI_SCL_LOW_CH$(CH)")
-    field(LNK1, "$(DEV):UNI_SCL_HIGH_CH$(CH)")
-    field(LNK2, "$(DEV):UNI_SCL_SET_LOW_CH$(CH)")
-    field(LNK3, "$(DEV):UNI_SCL_SET_HIGH_CH$(CH)")
-    field(LNK4, "$(DEV):UNI_SRL_LOW_CH$(CH)")
-    field(LNK5, "$(DEV):UNI_SRL_HIGH_CH$(CH)")
+    field(LNK0, "$(DEV):UNI_SRL_LOW_CH$(CH)")
+    field(LNK1, "$(DEV):UNI_SRL_HIGH_CH$(CH)")
+#    field(LNK2, "$(DEV):UNI_SCL_LOW_CH$(CH)")
+#    field(LNK3, "$(DEV):UNI_SCL_HIGH_CH$(CH)")
+#    field(LNK4, "$(DEV):UNI_SCL_SET_LOW_CH$(CH)")
+#    field(LNK5, "$(DEV):UNI_SCL_SET_HIGH_CH$(CH)")
 }
 
-record(stringout, "$(DEV):UNI_SCL_LOW_CH$(CH)")
-{
-    field(DESC, "Set P units RSL")
-    field(OMSL, "closed_loop")
-    field(DOL,  "$(DEV):GET_UNI")
-    field(OUT,  "$(DEV):SCL_LOW_CH$(CH).EGU")
-}
+#record(stringout, "$(DEV):UNI_SCL_LOW_CH$(CH)")
+#{
+#    field(DESC, "Set P units RSL")
+#    field(OMSL, "closed_loop")
+#    field(DOL,  "$(DEV):GET_UNI")
+#    field(OUT,  "$(DEV):SCL_LOW_CH$(CH).EGU")
+#}
 
-record(stringout, "$(DEV):UNI_SCL_HIGH_CH$(CH)")
-{
-    field(DESC, "Set P units RSL")
-    field(OMSL, "closed_loop")
-    field(DOL,  "$(DEV):GET_UNI")
-    field(OUT,  "$(DEV):SCL_HIGH_CH$(CH).EGU")
-}
+#record(stringout, "$(DEV):UNI_SCL_HIGH_CH$(CH)")
+#{
+#    field(DESC, "Set P units RSL")
+#    field(OMSL, "closed_loop")
+#    field(DOL,  "$(DEV):GET_UNI")
+#    field(OUT,  "$(DEV):SCL_HIGH_CH$(CH).EGU")
+#}
 
-record(stringout, "$(DEV):UNI_SCL_SET_LOW_CH$(CH)")
-{
-    field(DESC, "Set P units RSL")
-    field(OMSL, "closed_loop")
-    field(DOL,  "$(DEV):GET_UNI")
-    field(OUT,  "$(DEV):SET_SCL_LOW_CH$(CH).EGU")
-}
+#record(stringout, "$(DEV):UNI_SCL_SET_LOW_CH$(CH)")
+#{
+#    field(DESC, "Set P units RSL")
+#    field(OMSL, "closed_loop")
+#    field(DOL,  "$(DEV):GET_UNI")
+#    field(OUT,  "$(DEV):SET_SCL_LOW_CH$(CH).EGU")
+#}
 
-record(stringout, "$(DEV):UNI_SCL_SET_HIGH_CH$(CH)")
-{
-    field(DESC, "Set P units RSL")
-    field(OMSL, "closed_loop")
-    field(DOL,  "$(DEV):GET_UNI")
-    field(OUT,  "$(DEV):SET_SCL_HIGH_CH$(CH).EGU")
-}
+#record(stringout, "$(DEV):UNI_SCL_SET_HIGH_CH$(CH)")
+#{
+#    field(DESC, "Set P units RSL")
+#    field(OMSL, "closed_loop")
+#    field(DOL,  "$(DEV):GET_UNI")
+#    field(OUT,  "$(DEV):SET_SCL_HIGH_CH$(CH).EGU")
+#}
 
 record(stringout, "$(DEV):UNI_SRL_LOW_CH$(CH)")
 {

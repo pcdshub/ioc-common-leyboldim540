@@ -253,39 +253,39 @@ record(mbbo, "$(DEV):SET_SCS")
     field(FRSV, "NO_ALARM")
 }
 
-record(mbbi, "$(DEV):GET_SCT")
-{
-    field(DESC, "Get TTR sens. control")
-    field(DTYP, "stream")
-    field(SCAN, "$(CSCAN) second")
-    field(INP,  "@IM540.proto getSCT $(PORT)")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(ZRST, "TTR_CNTRL_OFF")
-    field(ONST, "TTR_CNTRL_CH3_ON")
-    field(TWST, "TTR_CNTRL_CH4_ON")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-}
+#record(mbbi, "$(DEV):GET_SCT")
+#{
+#    field(DESC, "Get TTR sens. control")
+#    field(DTYP, "stream")
+#    field(SCAN, "$(CSCAN) second")
+#    field(INP,  "@IM540.proto getSCT $(PORT)")
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(ZRST, "TTR_CNTRL_OFF")
+#    field(ONST, "TTR_CNTRL_CH3_ON")
+#    field(TWST, "TTR_CNTRL_CH4_ON")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#}
 
-record(mbbo, "$(DEV):SET_SCT")
-{
-    field(DESC, "Set TTR sens. control")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setSCT $(PORT)")
-    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(ZRST, "TTR_CNTRL_OFF")
-    field(ONST, "TTR_CNTRL_CH3_ON")
-    field(TWST, "TTR_CNTRL_CH4_ON")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-}
+#record(mbbo, "$(DEV):SET_SCT")
+#{
+#    field(DESC, "Set TTR sens. control")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setSCT $(PORT)")
+#    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(ZRST, "TTR_CNTRL_OFF")
+#    field(ONST, "TTR_CNTRL_CH3_ON")
+#    field(TWST, "TTR_CNTRL_CH4_ON")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#}
 
 record(mbbi, "$(DEV):GET_UNI")
 {
@@ -423,7 +423,7 @@ record(longin, "$(DEV):GET_IDO")
 record(fanout, "$(DEV):UNI_FANOUT")
 {
     field(DESC, "Fanout pressure units")
-    field(SCAN, "$(DSCAN) second")
+    field(SCAN, "1 second")
     field(SELM, "All")
     field(LNK0, "$(DEV):SET_P_UNITS_CH1")
     field(LNK1, "$(DEV):SET_P_UNITS_CH2")
