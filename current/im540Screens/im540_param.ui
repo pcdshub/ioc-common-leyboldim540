@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>420</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QLabel" name="Tittle">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>IM540 ${DEV} PARAMETERS CH${N} </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="3" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_7">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SCM_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_11">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SSV_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_BCC_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Sensor Sensitivity</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SAC_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_8">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>ca://${DEV}:GET_SFP_CH${N}</string>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SFP_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_4">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SCM_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_3">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SAS_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_4">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>ca://${DEV}:GET_SAC_CH${N}</string>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SAC_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_3">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SAS_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit_4">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SFP_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_9">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveContent" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SGC_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gas Correction</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>X-Ray Limit for Ioni Sens.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Control Mode</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Filament PWR treshold</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_5">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SGC_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_12">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SXR_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Amplifier Sensitivity</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_6">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SMF_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_10">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_SMF_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_BCC_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Measuring Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Amplification Correction</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit_6">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SXR_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit_5">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_SSV_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Default</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Bayard Alpert Emi Current</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PyDMLabel</class>
+   <extends>QLabel</extends>
+   <header>pydm.widgets.label</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMEnumComboBox</class>
+   <extends>QComboBox</extends>
+   <header>pydm.widgets.enum_combo_box</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>pydm.widgets.line_edit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

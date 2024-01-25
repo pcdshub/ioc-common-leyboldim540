@@ -10,7 +10,7 @@ fi
 # Setup pydm environment
 source /reg/g/pcds/pyps/conda/py36env.sh
 
-pushd $$IOCTOP/leyboldim540Screens
+pushd $$IOCTOP/im540Screens
 
 $$LOOP(LEYBOLD)
 pydm -m "DEV=$$BASE,IOC=$$IOC_PV" im540.ui &

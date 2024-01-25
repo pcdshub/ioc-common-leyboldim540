@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetNoConstraint</enum>
+   </property>
+   <item>
+    <widget class="QLabel" name="Tittle">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>IM540 ${DEV} DETAIL CH${N} </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Operation Time BAG</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="PyDMLabel" name="PyDMLabel_10">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>ca://${DEV}:SRL_HIGH_CH${N}</string>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SRL_HIGH_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Sensor Range Limits</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_7">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:STI_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_11">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>ca://${DEV}:SRL_LOW_CH${N}</string>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SRL_LOW_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_ISO_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Operation Time EXT</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_3">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:IST_EXT_CH${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Current Sens. Offset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Sensor Type</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_4">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>ca://${DEV}:IST_BAG_CH${N}</string>
+       </property>
+       <property name="precision" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:IST_BAG_CH${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Default</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="horizontalGroupBox">
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>CH${N} Status</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>170</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="channel" stdset="0">
+         <string>ca://${DEV}:STAT_CH${N}</string>
+        </property>
+        <property name="onColor" stdset="0">
+         <color>
+          <red>0</red>
+          <green>85</green>
+          <blue>255</blue>
+         </color>
+        </property>
+        <property name="offColor" stdset="0">
+         <color>
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </property>
+        <property name="labelPosition" stdset="0">
+         <enum>QTabWidget::West</enum>
+        </property>
+        <property name="numBits" stdset="0">
+         <number>8</number>
+        </property>
+        <property name="labels" stdset="0">
+         <stringlist>
+          <string>Measurement Data OK</string>
+          <string>Meas. range underflow</string>
+          <string>Meas. range overflow</string>
+          <string>No Sensor Connected</string>
+          <string>Sensor Error</string>
+          <string>EMI ON</string>
+          <string>Degas ON</string>
+          <string>CH${N} Ionivac selected</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PyDMLabel</class>
+   <extends>QLabel</extends>
+   <header>pydm.widgets.label</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMByteIndicator</class>
+   <extends>QWidget</extends>
+   <header>pydm.widgets.byte</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

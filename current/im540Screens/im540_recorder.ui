@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>481</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="Tittle">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>IM540 ${DEV} RECORDER OUT${N} </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_5">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:RSL_LOW_OUT${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Scalling</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_4">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:RSL_HIGH_OUT${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLabel::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_2">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_RSM_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_3">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_RSC_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Assigned Channel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Upper P Lim. of Rec. Scale</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Lower P Lim. of Rec. Scale</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_RSL_HIGH_OUT${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Scale Mode</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="PyDMLineEdit" name="PyDMLineEdit_2">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precision" stdset="0">
+        <number>2</number>
+       </property>
+       <property name="showUnits" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_RSL_LOW_OUT${N}</string>
+       </property>
+       <property name="displayFormat" stdset="0">
+        <enum>PyDMLineEdit::Exponential</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_RSO_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="PyDMLabel" name="PyDMLabel_3">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="precisionFromPV" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:GET_RSC_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_2">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_RSM_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="alarmSensitiveBorder" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="channel" stdset="0">
+        <string>ca://${DEV}:SET_RSO_OUT${N}</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Lower and Upper limit can be set only in SCALE_USER mode!</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PyDMLabel</class>
+   <extends>QLabel</extends>
+   <header>pydm.widgets.label</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMEnumComboBox</class>
+   <extends>QComboBox</extends>
+   <header>pydm.widgets.enum_combo_box</header>
+  </customwidget>
+  <customwidget>
+   <class>PyDMLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>pydm.widgets.line_edit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -12,7 +12,7 @@
 record(bi, "$(DEV):GET_EMI_CH$(CH)")
 {
     field(DESC, "Emision status for CH$(CH)")
-    field(SCAN, "$(DSCAN) second")
+    field(SCAN, "1 second")
     field(INP,  "$(DEV):STAT_CH$(CH).B5 CPP NMS")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
@@ -32,8 +32,19 @@ record(bo, "$(DEV):SET_EMI_CH$(CH)")
 record(bi, "$(DEV):GET_DGS_CH$(CH)")
 {
     field(DESC, "Get degassing status")
-    field(SCAN, "$(DSCAN) second")
+    field(SCAN, "1 second")
     field(INP,  "$(DEV):STAT_CH$(CH).B6 CPP NMS")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(bi, "$(DEV):CH$(CH)_SELECTED")
+{
+    field(DESC, "Get degassing status")
+    field(SCAN, "1 second")
+    field(INP,  "$(DEV):STAT_CH$(CH).B7 CPP NMS")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(ZSV,  "NO_ALARM")
