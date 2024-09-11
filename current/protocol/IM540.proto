@@ -76,6 +76,16 @@ setEMI              { out "EMI,\$1,%1d";               #Switch ON/OFF emission
 #                      out ENQ;
 #                      in  "%*d,%*d";
                     }
+setDGS              { out "DGS,%1d";               #Switch ON/OFF degassing
+                      in  ACK;
+#                      out ENQ;
+#                      in  "%*d";
+                    }
+getDGS             { out "DGS";                    #Get Degas status
+                      in  ACK;
+                      out ENQ;
+                      in  "%d";
+                    }
 getOFC              { out "OFC,\$1";                   #Offset correction Ch1-Ch4
                       in  ACK;
                       out ENQ;

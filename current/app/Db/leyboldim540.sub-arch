@@ -31,9 +31,9 @@ file leyboldim540_ch12.tpl-arch
         { BASE = $(BASE), N = 2 }
 }
 
-file leyboldim540_ch34.tpl-arch
-{
-        { BASE = $(BASE), N = 3 }
-        { BASE = $(BASE), N = 4 }
-}
+#file leyboldim540_ch34.tpl-arch
+#{
+#        { BASE = $(BASE), N = 3 }
+#        { BASE = $(BASE), N = 4 }
+#}
 

@@ -13,13 +13,13 @@ file leyboldim540_ch12.template
     { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  2  }
 }
 
-file leyboldim540_ch34.template
-{
-    pattern
-    { DEV,      PORT,       CSCAN,     DSCAN,     CH }
-    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  3  }
-    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  4  }
-}
+#file leyboldim540_ch34.template
+#{
+#    pattern
+#    { DEV,      PORT,       CSCAN,     DSCAN,     CH }
+#    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  3  }
+#    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  4  }
+#}
 
 file leyboldim540_ch14.template
 {
@@ -27,6 +27,6 @@ file leyboldim540_ch14.template
     { DEV,      PORT,       CSCAN,     DSCAN,     CH }
     { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  1  }
     { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  2  }
-    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  3  }
-    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  4  }
+#    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  3  }
+#    { $(DEV),   $(PORT),    $(CSCAN),  $(DSCAN),  4  }
 }
