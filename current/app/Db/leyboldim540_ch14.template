@@ -9,34 +9,34 @@
 #   CHANNEL NUMBER
 #
 #
-record(mbbi, "$(DEV):GET_OFC_CH$(CH)")
-{
-    field(DESC, "Offset correction of CH$(CH)")
-    field(DTYP, "stream")
-    field(SCAN, "$(DSCAN) second")
-    field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
-    field(ZRVL, "0")
-    field(ONVL, "1")
-    field(TWVL, "2")
-    field(ZRST, "IGNORE")
-    field(ONST, "APPLIED")
-    field(TWST, "OFF.RUNNING")
-    field(ZRSV, "NO_ALARM")
-    field(ONSV, "NO_ALARM")
-    field(TWSV, "NO_ALARM")
-}
+#record(mbbi, "$(DEV):GET_OFC_CH$(CH)")
+#{
+#    field(DESC, "Offset correction of CH$(CH)")
+#    field(DTYP, "stream")
+#    field(SCAN, "$(DSCAN) second")
+#    field(INP,  "@IM540.proto getOFC($(CH)) $(PORT)")
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(ZRST, "IGNORE")
+#    field(ONST, "APPLIED")
+#    field(TWST, "OFF.RUNNING")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#}
 
-record(bo, "$(DEV):SET_OFC_CH$(CH)")
-{
-    field(DESC, "Set Offset correction of CH$(CH)")
-    field(DTYP, "stream")
-    field(OUT,  "@IM540.proto setOFC($(CH)) $(PORT)")
-    field(FLNK, "$(DEV):GET_OFC_CH$(CH)")
-    field(ZNAM, "IGNORE")
-    field(ONAM, "APPLY")
-    field(ZSV,  "NO_ALARM")
-    field(OSV,  "NO_ALARM")
-}
+#record(bo, "$(DEV):SET_OFC_CH$(CH)")
+#{
+#    field(DESC, "Set Offset correction of CH$(CH)")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setOFC($(CH)) $(PORT)")
+#    field(FLNK, "$(DEV):GET_OFC_CH$(CH)")
+#    field(ZNAM, "IGNORE")
+#    field(ONAM, "APPLY")
+#    field(ZSV,  "NO_ALARM")
+#    field(OSV,  "NO_ALARM")
+#}
 
 record(mbbi, "$(DEV):GET_BCC_CH$(CH)")
 {

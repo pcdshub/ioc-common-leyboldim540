@@ -2,7 +2,6 @@ $(BASE):PRESS_CH$(N)                60 monitor
 $(BASE):GET_EMI_CH$(N)              60 monitor
 $(BASE):STAT_CH$(N)                 60 monitor
 $(BASE):STI_CH$(N)                  60 monitor
-$(BASE):GET_OFC_CH$(N)              60 monitor
 $(BASE):GET_ISO_CH$(N)              60 monitor
 $(BASE):SRL_HIGH_CH$(N)             60 monitor
 $(BASE):SRL_LOW_CH$(N)              60 monitor

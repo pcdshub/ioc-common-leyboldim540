@@ -1,4 +1,3 @@
-$(BASE):SET_OFC_CH$(N)
 $(BASE):SET_CAO_CH$(N)
 $(BASE):SET_SCC_CH$(N)
 $(BASE):SET_SCM_CH$(N)
