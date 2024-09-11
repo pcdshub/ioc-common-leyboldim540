@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>700</height>
+    <width>888</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,6 +48,157 @@
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Degas ON/OFF</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="PyDMLabel" name="PyDMLabel_11">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:SRL_LOW_CH1</string>
+             </property>
+             <property name="precision" stdset="0">
+              <number>2</number>
+             </property>
+             <property name="showUnits" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="precisionFromPV" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SRL_LOW_CH1</string>
+             </property>
+             <property name="displayFormat" stdset="0">
+              <enum>PyDMLabel::Exponential</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_25">
+             <property name="text">
+              <string>Sensor Readout</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_3">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:GET_EMI_CH1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="PyDMEnumButton" name="PyDMEnumButton_3">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SET_DGS</string>
+             </property>
+             <property name="widgetType" stdset="0">
+              <enum>PyDMEnumButton::PushButton</enum>
+             </property>
+             <property name="orientation" stdset="0">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Emi ON/OFF</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_28">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CH1 Selected&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_24">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:GET_DGS_CH1</string>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:GET_DGS_CH1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_10">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:SRL_HIGH_CH1</string>
+             </property>
+             <property name="precision" stdset="0">
+              <number>2</number>
+             </property>
+             <property name="showUnits" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="precisionFromPV" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SRL_HIGH_CH1</string>
+             </property>
+             <property name="displayFormat" stdset="0">
+              <enum>PyDMLabel::Exponential</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="PyDMByteIndicator" name="PyDMByteIndicator_2">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:CH1_SELECTED</string>
+             </property>
+             <property name="showLabels" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="1">
             <widget class="PyDMEnumButton" name="PyDMEnumButton">
              <property name="maximumSize">
@@ -73,14 +224,7 @@
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>Sensor Range Limits</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
+           <item row="6" column="2">
             <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton">
              <property name="font">
               <font>
@@ -109,187 +253,7 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Emi ON/OFF</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Sensor Type</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Degas ON/OFF</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_23">
-             <property name="text">
-              <string>Offset Correction</string>
-             </property>
-            </widget>
-           </item>
            <item row="6" column="1">
-            <widget class="PyDMLabel" name="PyDMLabel_11">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:SRL_LOW_CH1</string>
-             </property>
-             <property name="precision" stdset="0">
-              <number>2</number>
-             </property>
-             <property name="showUnits" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SRL_LOW_CH1</string>
-             </property>
-             <property name="displayFormat" stdset="0">
-              <enum>PyDMLabel::Exponential</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_5">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SET_OFC_CH1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_25">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_OFC_CH1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_25">
-             <property name="text">
-              <string>Sensor Readout</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_6">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:PRESS_CH1</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-             </property>
-             <property name="precision" stdset="0">
-              <number>2</number>
-             </property>
-             <property name="showUnits" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:PRESS_CH1</string>
-             </property>
-             <property name="displayFormat" stdset="0">
-              <enum>PyDMLabel::Exponential</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_24">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:GET_DGS_CH1</string>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_DGS_CH1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_3">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_EMI_CH1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_10">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:SRL_HIGH_CH1</string>
-             </property>
-             <property name="precision" stdset="0">
-              <number>2</number>
-             </property>
-             <property name="showUnits" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SRL_HIGH_CH1</string>
-             </property>
-             <property name="displayFormat" stdset="0">
-              <enum>PyDMLabel::Exponential</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
             <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_8">
              <property name="font">
               <font>
@@ -367,48 +331,48 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_28">
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_9">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CH1 Selected&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>Sensor Range Limits</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="PyDMByteIndicator" name="PyDMByteIndicator_2">
+           <item row="1" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_6">
              <property name="toolTip">
               <string/>
              </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:CH1_SELECTED</string>
+             <property name="text">
+              <string>ca://${DEV}:PRESS_CH1</string>
              </property>
-             <property name="showLabels" stdset="0">
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <property name="precision" stdset="0">
+              <number>2</number>
+             </property>
+             <property name="showUnits" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="precisionFromPV" stdset="0">
               <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="PyDMEnumButton" name="PyDMEnumButton_3">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string/>
              </property>
              <property name="alarmSensitiveBorder" stdset="0">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="channel" stdset="0">
-              <string>ca://${DEV}:SET_DGS</string>
+              <string>ca://${DEV}:PRESS_CH1</string>
              </property>
-             <property name="widgetType" stdset="0">
-              <enum>PyDMEnumButton::PushButton</enum>
+             <property name="displayFormat" stdset="0">
+              <enum>PyDMLabel::Exponential</enum>
              </property>
-             <property name="orientation" stdset="0">
-              <enum>Qt::Horizontal</enum>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Sensor Type</string>
              </property>
             </widget>
            </item>
@@ -428,6 +392,113 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <layout class="QGridLayout" name="gridLayout_3">
+           <item row="2" column="1">
+            <widget class="PyDMEnumButton" name="PyDMEnumButton_2">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SET_EMI_CH2</string>
+             </property>
+             <property name="orientation" stdset="0">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Emi ON/OFF</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Sensor Range Limits</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="PyDMLabel" name="PyDMLabel_12">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:SRL_LOW_CH2</string>
+             </property>
+             <property name="precision" stdset="0">
+              <number>2</number>
+             </property>
+             <property name="showUnits" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="precisionFromPV" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SRL_LOW_CH2</string>
+             </property>
+             <property name="displayFormat" stdset="0">
+              <enum>PyDMLabel::Exponential</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_26">
+             <property name="text">
+              <string>Sensor Readout</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_8">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="precisionFromPV" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:STI_CH2</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string>Degas ON/OFF</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:CH2_SELECTED</string>
+             </property>
+             <property name="showLabels" stdset="0">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="2">
             <widget class="PyDMLabel" name="PyDMLabel_9">
              <property name="toolTip">
@@ -459,15 +530,37 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_24">
-             <property name="text">
-              <string>Offset Correction</string>
+           <item row="2" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_4">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:GET_EMI_CH2</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="PyDMEnumButton" name="PyDMEnumButton_2">
+           <item row="3" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_27">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:GET_DGS_CH2</string>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:GET_DGS_CH2</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="PyDMEnumButton" name="PyDMEnumButton_4">
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -481,14 +574,88 @@
               <bool>false</bool>
              </property>
              <property name="channel" stdset="0">
-              <string>ca://${DEV}:SET_EMI_CH2</string>
+              <string>ca://${DEV}:SET_DGS</string>
+             </property>
+             <property name="widgetType" stdset="0">
+              <enum>PyDMEnumButton::PushButton</enum>
              </property>
              <property name="orientation" stdset="0">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
+           <item row="6" column="2">
+            <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_3">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>PARAMS</string>
+             </property>
+             <property name="filenames" stdset="0">
+              <stringlist>
+               <string>im540_param.ui</string>
+              </stringlist>
+             </property>
+             <property name="macros" stdset="0">
+              <stringlist>
+               <string>DEV=${DEV},N=2</string>
+              </stringlist>
+             </property>
+             <property name="openInNewWindow" stdset="0">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Sensor Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="PyDMLabel" name="PyDMLabel_13">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>ca://${DEV}:SRL_HIGH_CH2</string>
+             </property>
+             <property name="precision" stdset="0">
+              <number>2</number>
+             </property>
+             <property name="showUnits" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="precisionFromPV" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="alarmSensitiveBorder" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="channel" stdset="0">
+              <string>ca://${DEV}:SRL_HIGH_CH2</string>
+             </property>
+             <property name="displayFormat" stdset="0">
+              <enum>PyDMLabel::Exponential</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_27">
+             <property name="text">
+              <string>CH2 Selected</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
             <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_9">
              <property name="font">
               <font>
@@ -547,245 +714,6 @@
              </property>
              <property name="followSymlinks" stdset="0">
               <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_8">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:STI_CH2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_13">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:SRL_HIGH_CH2</string>
-             </property>
-             <property name="precision" stdset="0">
-              <number>2</number>
-             </property>
-             <property name="showUnits" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SRL_HIGH_CH2</string>
-             </property>
-             <property name="displayFormat" stdset="0">
-              <enum>PyDMLabel::Exponential</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_26">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_OFC_CH2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_3">
-             <property name="font">
-              <font>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>PARAMS</string>
-             </property>
-             <property name="filenames" stdset="0">
-              <stringlist>
-               <string>im540_param.ui</string>
-              </stringlist>
-             </property>
-             <property name="macros" stdset="0">
-              <stringlist>
-               <string>DEV=${DEV},N=2</string>
-              </stringlist>
-             </property>
-             <property name="openInNewWindow" stdset="0">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_4">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_EMI_CH2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Emi ON/OFF</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>Sensor Range Limits</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="PyDMLabel" name="PyDMLabel_12">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:SRL_LOW_CH2</string>
-             </property>
-             <property name="precision" stdset="0">
-              <number>2</number>
-             </property>
-             <property name="showUnits" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="precisionFromPV" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SRL_LOW_CH2</string>
-             </property>
-             <property name="displayFormat" stdset="0">
-              <enum>PyDMLabel::Exponential</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_26">
-             <property name="text">
-              <string>Sensor Readout</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="PyDMEnumComboBox" name="PyDMEnumComboBox_6">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SET_OFC_CH2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Sensor Type</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_21">
-             <property name="text">
-              <string>Degas ON/OFF</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="PyDMLabel" name="PyDMLabel_27">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>ca://${DEV}:GET_DGS_CH2</string>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:GET_DGS_CH2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_27">
-             <property name="text">
-              <string>CH2 Selected</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="PyDMByteIndicator" name="PyDMByteIndicator">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:CH2_SELECTED</string>
-             </property>
-             <property name="showLabels" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="PyDMEnumButton" name="PyDMEnumButton_4">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="alarmSensitiveBorder" stdset="0">
-              <bool>false</bool>
-             </property>
-             <property name="channel" stdset="0">
-              <string>ca://${DEV}:SET_DGS</string>
-             </property>
-             <property name="widgetType" stdset="0">
-              <enum>PyDMEnumButton::PushButton</enum>
-             </property>
-             <property name="orientation" stdset="0">
-              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
