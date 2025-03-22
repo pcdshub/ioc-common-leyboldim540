@@ -18,3 +18,13 @@ __pycache__/
 
 # Dev files
 run.sh
+
+# Terminal editor ignores
+*.swp
+*~
+
+# IDE ignores
+*.vscode
+
+# Core dumps
+core.*
