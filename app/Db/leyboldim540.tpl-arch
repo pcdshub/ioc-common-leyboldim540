@@ -1,0 +1,15 @@
+$(BASE):GET_GDE                  5 monitor
+$(BASE):GET_ISE                  5 monitor
+$(BASE):GET_ISW                  5 monitor
+$(BASE):GET_VSE                  5 monitor
+$(BASE):GET_VSW                  5 monitor
+$(BASE):GET_UNI                  5 monitor
+$(BASE):GET_IEC                  5 monitor
+$(BASE):GET_GAV                  5 monitor
+$(BASE):GET_GCV                  5 monitor
+$(BASE):GET_GEC                  5 monitor
+$(BASE):GET_GFC                  5 monitor
+$(BASE):GET_GFP                  5 monitor
+$(BASE):GET_GFU                  5 monitor
+$(BASE):GET_GRV                  5 monitor
+

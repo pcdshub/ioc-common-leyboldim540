@@ -1,0 +1,8 @@
+# Leybold IM540 IOC instance autosave file
+
+$$LOOP(LEYBOLD)
+file leyboldim540.archive
+{
+	{ IOC = "$$IOC_PV", BASE="$$BASE" }
+}
+$$ENDLOOP(LEYBOLD)

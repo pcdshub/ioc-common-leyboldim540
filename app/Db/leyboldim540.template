@@ -1,0 +1,473 @@
+#
+# Leybold IM540 DataDEV
+#
+#  DEV
+#  	EPICS prefix
+#  PORT
+#  	ASYN PORT_NAME
+#
+#
+record(bo, "$(DEV):RESET_ERR")
+{
+    field(DESC, "Reset error condition")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto resetError $(PORT)")
+    field(ZNAM, "RESET")
+    field(ONAM, "RESET")
+}
+
+record(bo, "$(DEV):RESET_DEVICE")
+{
+    field(DESC, "Trigg. SW reset")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto resetDevice $(PORT)")
+    field(ZNAM, "RESET")
+    field(ONAM, "RESET")
+}
+
+record(mbbiDirect, "$(DEV):GET_ERR_RS232")
+{
+    field(DESC, "Communication error")
+    field(SCAN, "Passive")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getERR $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):GET_GDE")
+{
+    field(DESC, "Global device Error")
+    field(DTYP, "stream")
+    field(INP,  "@IM540.proto getGDE $(PORT)")
+    field(SCAN, "$(DSCAN) second")
+    field(FLNK, "$(DEV):STATUSCALC")
+}
+
+record(calc, "$(DEV):STATUSCALC")
+{
+    field(CALC, "A>B?1:0")
+#    field(INPA, "$(DEV):GET_GDE.VAL PP")
+    field(INPA, "$(DEV):GET_GDE.VAL")
+    field(INPB, "0")
+    field(FLNK, "$(DEV):DEV_STATUS")
+}
+
+record(bi, "$(DEV):DEV_STATUS")
+{
+    field(DESC, "GDE status")
+    field(INP,  "$(DEV):STATUSCALC")
+    field(ZNAM, "OK")
+    field(ONAM, "ERROR")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "MAJOR")
+}
+
+record(bo, "$(DEV):SET_DGS")
+{
+    field(DESC, "Turn OFF/ON degassing")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setDGS $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+}
+
+record(mbbiDirect, "$(DEV):GET_ISE")
+{
+    field(DESC, "Ioni Supply Errors")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getISE $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):GET_ISW")
+{
+    field(DESC, "Ioni Supply Warnings")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getISW $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):GET_VSE")
+{
+    field(DESC, "Voltage Supply Errors")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getVSE $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):GET_VSW")
+{
+    field(DESC, "Voltage Supply Warnings")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getVSW $(PORT)")
+}
+
+record(bo, "$(DEV):GET_PRX")
+{
+    field(DESC, "Get status and P from all 4 CH")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(OUT,  "@IM540.proto getPRX($(DEV):STAT_CH1,$(DEV):PRESS_CH1,$(DEV):STAT_CH2,$(DEV):PRESS_CH2,$(DEV):STAT_CH3,$(DEV):PRESS_CH3,$(DEV):STAT_CH4,$(DEV):PRESS_CH4) $(PORT)")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH1")
+{
+    field(DESC, "CH1 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH1")
+{
+    field(DESC, "Pressure measurement on CH1")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH2")
+{
+    field(DESC, "CH2 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH2")
+{
+    field(DESC, "Pressure measurement on CH2")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH3")
+{
+    field(DESC, "CH3 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH3")
+{
+    field(DESC, "Pressure measurement on CH3")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+}
+
+record(mbbiDirect, "$(DEV):STAT_CH4")
+{
+    field(DESC, "CH4 Status")
+    field(DTYP, "Raw Soft Channel")
+}
+
+record(ai, "$(DEV):PRESS_CH4")
+{
+    field(DESC, "Pressure measurement on CH4")
+    field(DTYP, "Soft Channel")
+    field(PREC, "4")
+}
+
+record(bi, "$(DEV):GET_FCO")
+{
+    field(DESC, "Auto Sens. selection if error")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getFCO $(PORT)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(ZSV,  "NO_ALARM")
+    field(OSV,  "NO_ALARM")
+}
+
+record(mbbi, "$(DEV):GET_RMO")
+{
+    field(DESC, "Get mode of recorder output")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getRMO $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "IM540")
+    field(ONST, "IM520_AUTO")
+    field(TWST, "IM520_FIX")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_RMO")
+{
+    field(DESC, "Set mode of recorder output")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setRMO $(PORT)")
+    field(FLNK, "$(DEV):GET_RMO")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(ZRST, "IM540")
+    field(ONST, "IM520_AUTO")
+    field(TWST, "IM520_FIX")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+}
+
+## Reactivate the sensor control after changing the SCS, SCM, SCC, SCL, SCT parameters.
+record(bo, "$(DEV):SET_SCA")
+{
+    field(DESC, "Reactivate sens. control")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCA $(PORT)")
+}
+
+record(mbbi, "$(DEV):GET_SCS")
+{
+    field(DESC, "Get sensor control setting")
+    field(DTYP, "stream")
+    field(SCAN, "$(CSCAN) second")
+    field(INP,  "@IM540.proto getSCS $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "CH_CNTRL")
+    field(ONST, "TTR_CNTRL_IONIVAC")
+    field(TWST, "VIA_ANLG_INP")
+    field(THST, "VIA_DIG_INP")
+    field(FRST, "VIA_ANLG_DIG_INP")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+record(mbbo, "$(DEV):SET_SCS")
+{
+    field(DESC, "Set sensor control setting")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setSCS $(PORT)")
+    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(ZRST, "CH_CNTRL")
+    field(ONST, "TTR_CNTRL_IONIVAC")
+    field(TWST, "VIA_ANLG_INP")
+    field(THST, "VIA_DIG_INP")
+    field(FRST, "VIA_ANLG_DIG_INP")
+    field(ZRSV, "NO_ALARM")
+    field(ONSV, "NO_ALARM")
+    field(TWSV, "NO_ALARM")
+    field(THSV, "NO_ALARM")
+    field(FRSV, "NO_ALARM")
+}
+
+#record(mbbi, "$(DEV):GET_SCT")
+#{
+#    field(DESC, "Get TTR sens. control")
+#    field(DTYP, "stream")
+#    field(SCAN, "$(CSCAN) second")
+#    field(INP,  "@IM540.proto getSCT $(PORT)")
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(ZRST, "TTR_CNTRL_OFF")
+#    field(ONST, "TTR_CNTRL_CH3_ON")
+#    field(TWST, "TTR_CNTRL_CH4_ON")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#}
+
+#record(mbbo, "$(DEV):SET_SCT")
+#{
+#    field(DESC, "Set TTR sens. control")
+#    field(DTYP, "stream")
+#    field(OUT,  "@IM540.proto setSCT $(PORT)")
+#    field(FLNK, "$(DEV):SET_SCA") # Reactivate the sensor control
+#    field(ZRVL, "0")
+#    field(ONVL, "1")
+#    field(TWVL, "2")
+#    field(ZRST, "TTR_CNTRL_OFF")
+#    field(ONST, "TTR_CNTRL_CH3_ON")
+#    field(TWST, "TTR_CNTRL_CH4_ON")
+#    field(ZRSV, "NO_ALARM")
+#    field(ONSV, "NO_ALARM")
+#    field(TWSV, "NO_ALARM")
+#}
+
+record(mbbi, "$(DEV):GET_UNI")
+{
+    field(DESC, "Get pressure unit")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getUNI $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "mbar")
+    field(ONST, "Torr")
+    field(TWST, "Pa")
+    field(THST, "Micron")
+}
+
+record(mbbo, "$(DEV):SET_UNI")
+{
+    field(DESC, "Set pressure unit")
+    field(DTYP, "stream")
+    field(OUT,  "@IM540.proto setUNI $(PORT)")
+    field(FLNK, "$(DEV):GET_UNI")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(ZRST, "mbar")
+    field(ONST, "Torr")
+    field(TWST, "Pa")
+    field(THST, "Micron")
+}
+
+record(mbbi, "$(DEV):GET_IEC")
+{
+    field(DESC, "Get emi. current")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getIEC $(PORT)")
+    field(ZRVL, "0")
+    field(ONVL, "1")
+    field(TWVL, "2")
+    field(THVL, "3")
+    field(FRVL, "4")
+    field(FVVL, "5")
+    field(SXVL, "6")
+    field(ZRST, "0.0 mA")
+    field(ONST, "0.1 mA")
+    field(TWST, "1 mA")
+    field(THST, "1.6 mA")
+    field(FRST, "10 mA")
+    field(FVST, "45 mA")
+    field(SXST, "90 mA")
+}
+
+record(ai, "$(DEV):GET_GAV")
+{
+    field(DESC, "Get gauge anode voltage")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGAV $(PORT)")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GCV")
+{
+    field(DESC, "Get gauge cathode voltage")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGCV $(PORT)")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GEC")
+{
+    field(DESC, "Get gauge emission current")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGEC $(PORT)")
+    field(EGU,  "mA")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFC")
+{
+    field(DESC, "Get filament current")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGFC $(PORT)")
+    field(EGU,  "A")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFP")
+{
+    field(DESC, "Get filament power")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGFP $(PORT)")
+    field(EGU,  "W")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GFU")
+{
+    field(DESC, "Get filament voltage")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGFU $(PORT)")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(ai, "$(DEV):GET_GRV")
+{
+    field(DESC, "Get filament reflector voltage")
+    field(DTYP, "stream")
+    field(SCAN, "$(DSCAN) second")
+    field(INP,  "@IM540.proto getGRV $(PORT)")
+    field(EGU,  "V")
+    field(PREC, "3")
+}
+
+record(longin, "$(DEV):GET_IDO")
+{
+    field(DESC, "Get IM540 operation time")
+    field(DTYP, "stream")
+    field(SCAN, "10 second")
+    field(INP,  "@IM540.proto getIDO $(PORT)")
+    field(EGU,  "h")
+}
+
+record(fanout, "$(DEV):UNI_FANOUT")
+{
+    field(DESC, "Fanout pressure units")
+    field(SCAN, "1 second")
+    field(SELM, "All")
+    field(LNK0, "$(DEV):SET_P_UNITS_CH1")
+    field(LNK1, "$(DEV):SET_P_UNITS_CH2")
+    field(LNK2, "$(DEV):SET_P_UNITS_CH3")
+    field(LNK3, "$(DEV):SET_P_UNITS_CH4")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH1")
+{
+    field(DESC, "Set P units CH1")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH1.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH2")
+{
+    field(DESC, "Set P units CH2")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH2.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH3")
+{
+    field(DESC, "Set P units CH3")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH3.EGU")
+}
+
+record(stringout, "$(DEV):SET_P_UNITS_CH4")
+{
+    field(DESC, "Set P units CH4")
+    field(OMSL, "closed_loop")
+    field(DOL,  "$(DEV):GET_UNI")
+    field(OUT,  "$(DEV):PRESS_CH4.EGU")
+}
